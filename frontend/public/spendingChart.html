@@ -16,13 +16,12 @@
   <script>
     let custData = document.getElementById('custData').getContext('2d');
 
-    // Global Options
     Chart.defaults.global.defaultFontFamily = 'Cursive';
     Chart.defaults.global.defaultFontSize = 18;
     Chart.defaults.global.defaultFontColor = '#361212'
 
     let custChart = new Chart(custData, {
-      type:'line', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      type:'line',
       data:{
         labels:['5 weeks ago', '4 weeks ago', '3 weeks ago', '2 weeks ago', 'Last week', 'This week'],
         datasets:[{
