@@ -8,17 +8,17 @@ const Navbar = () => {
                 activeKey="/home"
                 onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
             >
-                <Nav className="px-4 cursor-pointr" activeKey="/home">
-                    <Nav.Item>
+                <Nav className="flex cursor-pointr items-end " activeKey="/home">
+                    <Nav.Item className="px-4">
                         <Nav.Link href="/home">Active</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    <Nav.Item className="px-4">
                         <Nav.Link eventKey="link-1">Link</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    <Nav.Item className="px-4">
                         <Nav.Link eventKey="link-2">Link</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
+                    <Nav.Item className="px-4">
                         <Nav.Link eventKey="disabled" disabled>
                             Disabled
                         </Nav.Link>
