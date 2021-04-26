@@ -1,27 +1,30 @@
 import React from 'react';
-import Nav from 'react-bootstrap/Nav'
+import Nav from 'react-bootstrap/Nav';
 
 const Navbar = () => {
     return (
         <div className="">
+            {/* This does nothing, needs to be changed later on */}
             <Nav
                 activeKey="/home"
                 onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
             >
-                <Nav className="flex cursor-pointr items-end " activeKey="/home">
+                <Nav 
+                    style={{display: 'flex', justifyContent: 'flex-end'}} 
+                    className="px-6 pt-6 pb-2"
+                    activeKey="/home"
+                >
                     <Nav.Item className="px-4">
-                        <Nav.Link href="/home">Active</Nav.Link>
+                        <Nav.Link href="/home">Dashboard</Nav.Link>
                     </Nav.Item>
                     <Nav.Item className="px-4">
-                        <Nav.Link eventKey="link-1">Link</Nav.Link>
+                        <Nav.Link eventKey="link-1">New Drink</Nav.Link>
                     </Nav.Item>
                     <Nav.Item className="px-4">
-                        <Nav.Link eventKey="link-2">Link</Nav.Link>
+                        <Nav.Link eventKey="link-2">Histoy</Nav.Link>
                     </Nav.Item>
                     <Nav.Item className="px-4">
-                        <Nav.Link eventKey="disabled" disabled>
-                            Disabled
-                        </Nav.Link>
+                        <Nav.Link eventKey="disabled">Log Out</Nav.Link>
                     </Nav.Item>
                 </Nav>
             </Nav>
