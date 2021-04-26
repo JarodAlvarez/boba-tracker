@@ -13,7 +13,7 @@ const App = () => {
           <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
         <div className="bg-blue-600 h-screen text-white flex items-center">
-          <h1 className="text-center font-bold text-5xl w-full">Hello World!</h1>
+          <h1 className="text-center font-bold text-5xl w-full">Hello Boba Peeps</h1>
         </div>
       </Router>
     </div>
