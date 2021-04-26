@@ -1,22 +1,27 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
+// import { LinkContainer } from 'react-router-bootstrap'
+// import Dashboard from '../pages/Dashboard';
 
 const Navbar = () => {
     return (
         <div className="">
-            {/* This does nothing, needs to be changed later on */}
+            {/*React-bootstrap Nav */}
+            {/* This does nothing, needs to be changed later on for buttons to function*/}
             <Nav
                 activeKey="/home"
                 onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
             >
-                <Nav 
-                    style={{display: 'flex', justifyContent: 'flex-end'}} 
+                <Nav
+                    style={{ display: 'flex', justifyContent: 'flex-end' }}
                     className="px-6 pt-6 pb-2 font-sans"
                     activeKey="/home"
                 >
                     <Nav.Item className="px-4">
-                        <Nav.Link href="/pages/Dashboard">Dashboard</Nav.Link>
+                        <Nav.Link as={Link} to="/dashboard" >Dashboard</Nav.Link>
                     </Nav.Item>
+
                     <Nav.Item className="px-4">
                         <Nav.Link eventKey="link-1">New Drink</Nav.Link>
                     </Nav.Item>
