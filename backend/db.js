@@ -2,18 +2,10 @@ const Pool = require("pg").Pool;
 
 const pool = new Pool({
     user: "postgres",
-    password: "", //LOCAL PASSWORD HERE
-    database: "", //LOCAL DATABASE GOES HERE
-    host: "localhost",
+    password: "B0ba8472!!",
+    database: "aws_bobabase",
+    host: "bobabase-aws.chyxfte2ecdp.us-east-2.rds.amazonaws.com",
     port: 5432,
 });
-/*
-exports.insertBoba = async (index) => {
-    const insert = 'INSERT INTO boba_entries(bobaid, price, drinkname, description) VALUES $4';
-    const query = {
-        text: insert,
-        values: [bobaid, ]
-    }
-}*/
 
 module.exports = pool;
