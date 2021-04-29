@@ -25,59 +25,64 @@ const LogIn = () => {
   }
 
   return (
-    <div className="min-h-screen p-4 ">
+    <div className="min-h-screen p-2- bg-white">
       <main className="container mx-auto max-w-md">
-        <div className="sm:h-64 h-32 ">
-          <div className="mx-auto border-2 border-black">BobaTracker</div>
+          <div className="text-5xl font-cursive flex ml-16">Boba Tracker
+          <img src="https://i.imgur.com/ZAeNBty.png" alt="..." class="rounded max-w-full h-16 align-right ml-2" />
+          </div>
+        <div className="sm:h-18 h-16">
+          <div className="text-base font-cursive text-center">An easy way to track your monthly boba tea</div>
+          <div className="text-base font-cursive text-center">purchases</div>
         </div>
-        <div className="bg-gray-800 rounded-t-lg  text-white text-center text-xl py-4">
-          Welcome back!
-        </div>
-        <form className="bg-gray-700 shadow-md p-8" onSubmit={loginHandler}>
+        <form className="outline-black bg-loginreg shadow-md p-12 mx-8" onSubmit={loginHandler}>
           <fieldset>
             {error && (
               <div className="p-2 bg-red-700 text-gray-100 text-center text-xl mb-4 rounded">
                 {error}
               </div>
             )}
-            <div className="flex flex-col sm:flex-row items-baseline justify-between mb-2 w-full">
+            <div className="flex flex-col sm:flex-row items-baseline justify-center mb-4 w-full h-12">
+            <label
+                className="text-black text-2xl font-bold"
+              >
+                Welcome back!
+              </label>
+              </div>
+            <div className="items-baseline justify-between mb-2 w-full">
               <label
-                className="text-white text-lg font-bold"
+                className="text-black text-lg"
                 htmlFor="username"
               >
-                Username
+                Email
               </label>
-              <div className="mb-4 w-full sm:w-2/3">
+              <div className="mb-4 w-full mt-2">
                 <input
                   id="email"
                   name="email"
                   type="text"
                   required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-2
-                  bg-gray-900 text-gray-100 leading-tight focus:shadow-outline"
+                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-3
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
-                <p className="text-gray-500 text-sm text-right">
-                  Enter your username or email address.
-                </p>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row items-baseline justify-between mb-2 w-full">
+            <div className="items-baseline justify-between mb-2 w-full">
               <label
-                className="text-white text-lg mb-2 font-bold"
+                className="text-black text-lg mb-2"
                 name="password"
                 htmlFor="password"
               >
                 Password
               </label>
-              <div className="mb-4 w-full sm:w-2/3">
+              <div className="mb-4 w-full mt-2">
                 <input
                   id="password"
                   name="password"
                   type="password"
                   required
                   className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-2
-                  bg-gray-900 text-gray-100 leading-tight focus:shadow-outline"
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
                 <p className="text-gray-500 text-sm text-right">
@@ -88,19 +93,19 @@ const LogIn = () => {
               </div>
             </div>
             <button
-              className="w-full bg-red-400 text-white font-bold py-2 px-4 rounded 
-              focus:outline-none focus:shadow-outline hover:bg-red-500"
+              className="w-48 bg-logregbutton text-black font-bold py-2 px-4 rounded 
+              focus:outline-none focus:shadow-outline hover:bg-red-500 ml-12 mt-4"
               type="submit"
             >
-              Go!
+              Sign in
             </button>
           </fieldset>
         </form>
-        <footer className="bg-gray-800 text-white rounded-b-lg text-center py-4">
-          {'Need a new account? '}
+        <footer className="text-black rounded-b-lg text-center py-4">
+          {'New member? '}
           <nobr>
             <Link className="text-blue-400 font-bold" to="/register">
-              Register an account
+              Create an account!
             </Link>
           </nobr>
         </footer>
