@@ -39,7 +39,7 @@ const Register = () => {
     <div className="min-h-screen p-2- bg-white">
       <main className="container mx-auto max-w-md">
           <div className="text-5xl font-cursive flex ml-16">Boba Tracker
-          <img src="https://i.imgur.com/ZAeNBty.png" alt="..." class="rounded max-w-full h-16 align-right ml-2" />
+          <img src="https://i.imgur.com/ZAeNBty.png" alt="..." className="rounded max-w-full h-16 align-right ml-2" />
           </div>
         <div className="sm:h-18 h-16">
           <div className="text-base font-cursive text-center">An easy way to track your monthly boba tea</div>
