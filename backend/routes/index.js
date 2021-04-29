@@ -15,6 +15,7 @@ router.getAll = async (req, res) => {
 }
 //get a boba
 router.getOne = async (req, res) => {
+  console.log(req.params.boba_id);
   const boba = await selectID(req.params.boba_id);
   if (boba == undefined) {
     res.status(404).send();
@@ -27,7 +28,7 @@ router.post = async (req, res) => {
   try {
     console.log(req.body);
     const outBoba = {
-      'boba_id': req.body.bobaid,
+      'boba_id': req.body.boba_id,
       'price': req.body.price,
       'drinkname': req.body.drinkname,
       'description': req.body.description,
@@ -41,8 +42,34 @@ router.post = async (req, res) => {
 }
 
 //update a boba
+router.update = async (req, res) => {
+  try {
+    console.log(req.body);
+    const upBoba = {
+      'boba_id': req.body.boba_id,
+      'price': req.body.price,
+      'drinkname': req.body.drinkname,
+      'description': req.body.description,
+    };
+    await updateBoba(upBoba);
+    res.status(201).send(upBoba);
+  } catch (err) {
+    console.error(err.message);
+    res.status(404).send();
+  }
+}
 
 //delete a boba
+router.del = async(req, res) => {
+  try {
+    console.log(req.params.boba_id);
+    const boba = await deleteBoba(req.params.boba_id);
+    res.status(200).send();
+  } catch (err) {
+    console.error(err.message);
+    res.status(404).send();
+  }
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -62,7 +89,9 @@ selectID = async(boba_id) => {
     text: select,
     values: [boba_id],
   };
-
+  const {rows} = await pool.query(query);
+  console.log(boba_id);
+  return rows.length == 1 ? rows : undefined;
 };
 
 insertBoba = async(boba) => {
@@ -72,6 +101,24 @@ insertBoba = async(boba) => {
     values: [boba.boba_id, boba.price, boba.drinkname, boba.description]
   };
   await pool.query(query);  
+};
+
+updateBoba = async(boba) => {
+  const update = 'UPDATE boba_entries SET price = $2, drinkname = $3, description = $4 WHERE boba_id = $1';
+  const query = {
+    text: update,
+    values: [boba.boba_id, boba.price, boba.drinkname, boba.description]
+  };
+  await pool.query(query);  
+};
+
+deleteBoba = async(boba_id) => {
+  const deletion = 'DELETE FROM boba_entries WHERE boba_id = $1';
+  const query = {
+    text: deletion,
+    values: [boba_id],
+  };
+  await pool.query(query);
 };
 
 module.exports = router;
