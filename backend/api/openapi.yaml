@@ -51,8 +51,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+    put:
+      description: Updates an existing boba entry
+      requestBody:
+        description: Boba to update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Boba'
+      responses:
+        201:
+          description: Application response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Boba'
+        400:
+          description: Invalid ID
+        404:
+          description: Boba not found.
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'            
 
-  /v0/boba/{bobaid}:
+  /v0/boba/{boba_id}:
     get:
       description: Returns a single boba
       parameters:
@@ -65,6 +91,32 @@ paths:
       responses:
         200:
           description: Boba found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Boba'
+        400:
+          description: Invalid ID
+        404:
+          description: Boba not found
+        default:
+          description: Unexpected Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      description: Deletes a single boba
+      parameters:
+      - name: boba_id
+        in: path
+        description: ID of the boba
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successfully deleted
           content:
             application/json:
               schema:
@@ -102,7 +154,7 @@ components:
       type: object
       additionalProperties: false
       properties:
-        bobaid:
+        boba_id:
           type: integer
         price:
           type: number
@@ -112,7 +164,7 @@ components:
         description:
           type: string
       required:
-        - bobaid 
+        - boba_id 
         - price
         - drinkname 
 
