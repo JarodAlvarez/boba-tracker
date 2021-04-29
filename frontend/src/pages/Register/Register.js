@@ -86,6 +86,26 @@ const Register = () => {
               >
                 Password
               </label>
+              <div className="mb-2 w-full mt-2">
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-2
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
+                  onChange={onChangeHandler}
+                />
+              </div>
+            </div>
+            <div className="items-baseline justify-between mb-2 w-full">
+              <label
+                className="text-black text-lg mb-2"
+                name="password"
+                htmlFor="password"
+              >
+                Confirm Password
+              </label>
               <div className="mb-4 w-full mt-2">
                 <input
                   id="password"
