@@ -11,13 +11,15 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
     },
+
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
 
       black: '#000',
       white: '#fff',
-
+      loginreg: '#ebf6f5',
+      logregbutton: '#5369ca',
       gray: {
         100: '#f7fafc',
         200: '#edf2f7',
@@ -143,7 +145,9 @@ module.exports = {
       '12': '3rem',
       '16': '4rem',
       '20': '5rem',
+      '22': '5.5rem',
       '24': '6rem',
+      '28': '7rem',
       '32': '8rem',
       '40': '10rem',
       '48': '12rem',
