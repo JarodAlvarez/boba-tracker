@@ -1,14 +1,13 @@
 import React from 'react'
 import Nav from 'react-bootstrap/Nav'
+import { useAuth } from 'contexts/authContext'
 
 const Navbar = () => {
+  const authContext = useAuth()
   return (
     <div className="">
       {/* This does nothing, needs to be changed later on */}
-      <Nav
-        activeKey="/home"
-        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      >
+      <Nav activeKey="/home">
         <Nav
           style={{ display: 'flex', justifyContent: 'flex-end' }}
           className="px-6 pt-6 pb-2"
@@ -28,7 +27,7 @@ const Navbar = () => {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item className="px-4">
-            <Nav.Link eventKey="disabled">Log Out</Nav.Link>
+            <Nav.Link onClick={authContext.logout}>Log Out</Nav.Link>
           </Nav.Item>
         </Nav>
       </Nav>
