@@ -11,7 +11,7 @@ const config = [
     path: routePaths.DASHBOARD,
     exact: true,
     component: Dashboard,
-    //authOnly: true,
+    authOnly: true,
     redirect: routePaths.LOGIN,
   },
   {
@@ -29,10 +29,16 @@ const config = [
   // { path: routePaths.RESET_PASSWORD, component: ResetPasswordPage },
   {
     path: routePaths.ADDDRINK,
+    authOnly: true,
     component: AddDrink,
     redirect: routePaths.LOGIN,
   },
-  { path: routePaths.HISTORY, component: History, redirect: routePaths.LOGIN },
+  {
+    path: routePaths.HISTORY,
+    authOnly: true,
+    component: History,
+    redirect: routePaths.LOGIN,
+  },
 ]
 
 export default config
