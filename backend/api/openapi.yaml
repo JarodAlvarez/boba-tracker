@@ -78,13 +78,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'            
 
-  /v0/boba/{boba_id}:
+  /v0/boba/{purchase_date}/{drinkname}:
     get:
       description: Returns a single boba
       parameters:
-      - name: boba_id
+      - name: purchase_date
         in: path
-        description: ID of the boba
+        description: Date of Purchase must be in YYYY-MM-DD format
+        required: true
+        schema:
+          type: string
+      - name: drinkname
+        in: path
+        description: Name of the drink
         required: true
         schema:
           type: string
@@ -108,9 +114,15 @@ paths:
     delete:
       description: Deletes a single boba
       parameters:
-      - name: boba_id
+      - name: purchase_date
         in: path
-        description: ID of the boba
+        description: Date of Purchase must be in YYYY-MM-DD format
+        required: true
+        schema:
+          type: string
+      - name: drinkname
+        in: path
+        description: Name of the drink
         required: true
         schema:
           type: string
@@ -154,18 +166,20 @@ components:
       type: object
       additionalProperties: false
       properties:
-        boba_id:
-          type: integer
+        purchase_date:
+          type: string
+        drinkname:
+          type: string
         price:
           type: number
           format: float
-        drinkname:
-          type: string
-        description:
-          type: string
+        sweetness:
+          type: number
+          format: float
       required:
-        - boba_id 
-        - price
+        - purchase_date
         - drinkname 
+        - price
+        - sweetness 
 
 

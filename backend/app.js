@@ -57,7 +57,7 @@ app.use(function(err, req, res, next) {
 app.get("/v0/boba", indexRouter.getAll);
 
 //get a boba
-app.get("/v0/boba/:boba_id", indexRouter.getOne);
+app.get("/v0/boba/:purchase_date/:drinkname", indexRouter.getOne);
 
 //create a boba
 app.post("/v0/boba", indexRouter.post);
@@ -65,6 +65,6 @@ app.post("/v0/boba", indexRouter.post);
 //update a boba
 app.put("/v0/boba", indexRouter.update);
 //delete a boba
-app.delete("/v0/boba/:boba_id", indexRouter.del);
+app.delete("/v0/boba/:purchase_date/:drinkname", indexRouter.del);
 
 module.exports = app;
