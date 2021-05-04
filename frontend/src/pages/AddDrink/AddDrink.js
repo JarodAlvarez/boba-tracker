@@ -1,11 +1,18 @@
-import React from 'react'
+import Form from './Form'
+import Success from './Success'
+import React, { useState } from 'react'
 
 const AddDrink = () => {
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  function submitForm() {
+    setIsSubmitted(true)
+  }
   return (
-    <div className="bg-blue-600 h-screen text-white flex items-center">
-      <h1 className="text-center font-bold text-5xl w-full">AddDrink Page</h1>
+    <div>
+      {!isSubmitted ? <Form submitForm={submitForm} /> : <Success />}
     </div>
   )
 }
 
-export default AddDrink
+export default AddDrink;
