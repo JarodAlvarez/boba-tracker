@@ -85,8 +85,8 @@ export const AuthProvider = ({ children }) => {
         email: username,
         password,
       })
-      dispatch({ type: LOGIN_SUCCESS, payload: data })
       Cookies.set('userInfo', JSON.stringify(data), { expires: 7 })
+      dispatch({ type: LOGIN_SUCCESS, payload: data })
     } catch (err) {
       dispatch({ type: LOGIN_FAIL, payload: err.message })
       throw err.message
@@ -113,8 +113,8 @@ export const AuthProvider = ({ children }) => {
         email,
         password,
       })
-      dispatch({ type: REGISTER_SUCCESS, payload: data })
       Cookies.set('userInfo', JSON.stringify(data))
+      dispatch({ type: REGISTER_SUCCESS, payload: data })
     } catch (err) {
       dispatch({ type: REGISTER_FAIL, payload: err.message })
       throw err.message
