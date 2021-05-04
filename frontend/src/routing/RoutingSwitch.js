@@ -18,9 +18,6 @@ const RoutingSwitch = () => {
                 return <div>LOADING</div>
               else if (
                 (!route.authOnly && !route.unAuthOnly) ||
-                (route.adminOnly &&
-                  authContext.user &&
-                  authContext.user.isAdmin) ||
                 (route.unAuthOnly && !authContext.authenticated) ||
                 (route.authOnly && authContext.authenticated)
               )
