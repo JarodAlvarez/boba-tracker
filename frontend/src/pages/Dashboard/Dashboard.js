@@ -68,7 +68,7 @@ const Dashboard = () => {
                     </div>
 
                 </div>
-                <div class="container mx-auto px-8 p-8">
+                <div class=" object-contain container mx-auto p-12">
                     <SpendingChart />
                 </div>
             </div>
