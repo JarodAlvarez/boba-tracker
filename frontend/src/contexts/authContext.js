@@ -47,7 +47,6 @@ const initialState = {
   error: '',
   authenticated: false,
   token: '',
-  address: '',
 }
 
 const AuthContext = React.createContext({
@@ -67,7 +66,7 @@ export const AuthProvider = ({ children }) => {
     let user = Cookies.getJSON('userInfo')
     if (user !== undefined) {
       axios
-        .get('https://a2z-ecommerce.herokuapp.com/user/verifyLogin', {
+        .get('http://localhost:3010/users/verifyLogin', {
           headers: {
             Authorization: 'Bearer ' + user.token,
           },
@@ -82,15 +81,12 @@ export const AuthProvider = ({ children }) => {
   const logIn = async (username, password) => {
     dispatch({ type: LOGIN_REQUEST, payload: { username, password } })
     try {
-      const { data } = await axios.post(
-        'https://a2z-ecommerce.herokuapp.com/user/signIn',
-        {
-          username,
-          password,
-        }
-      )
-      dispatch({ type: LOGIN_SUCCESS, payload: data })
+      const { data } = await axios.post('http://localhost:3010/users/signIn', {
+        email: username,
+        password,
+      })
       Cookies.set('userInfo', JSON.stringify(data), { expires: 7 })
+      dispatch({ type: LOGIN_SUCCESS, payload: data })
     } catch (err) {
       dispatch({ type: LOGIN_FAIL, payload: err.message })
       throw err.message
@@ -110,20 +106,15 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const signUp = async (email, password, username, name) => {
-    dispatch({ type: REGISTER_REQUEST, payload: { email, username, password } })
+  const signUp = async (email, password) => {
+    dispatch({ type: REGISTER_REQUEST, payload: { email, password } })
     try {
-      const { data } = await axios.post(
-        'https://a2z-ecommerce.herokuapp.com/user/signUp',
-        {
-          email,
-          username,
-          password,
-          name,
-        }
-      )
-      dispatch({ type: REGISTER_SUCCESS, payload: data })
+      const { data } = await axios.post('http://localhost:3010/users/', {
+        email,
+        password,
+      })
       Cookies.set('userInfo', JSON.stringify(data))
+      dispatch({ type: REGISTER_SUCCESS, payload: data })
     } catch (err) {
       dispatch({ type: REGISTER_FAIL, payload: err.message })
       throw err.message

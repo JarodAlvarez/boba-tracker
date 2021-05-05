@@ -18,7 +18,6 @@ const Register = () => {
     if (name === 'email') setEmail(value)
     else if (name === 'password') setPassword(value)
     else if (name === 'confirmation') setConfirmation(value)
-    else if (name === 'name') setName(value)
   }
 
   const signUpHandler = async (e) => {
@@ -28,7 +27,7 @@ const Register = () => {
         setError("PASSWORDS AND CONFIRMATION DON'T MATCH")
       else {
         setError('')
-        await authContext.signUp(email, password, name)
+        await authContext.signUp(email, password)
       }
     } catch (err) {
       setError(err)
@@ -38,14 +37,24 @@ const Register = () => {
   return (
     <div className="min-h-screen p-2- bg-white">
       <main className="container mx-auto max-w-md">
-          <div className="text-5xl font-cursive flex ml-16">Boba Tracker
-          <img src="https://i.imgur.com/ZAeNBty.png" alt="..." className="rounded max-w-full h-16 align-right ml-2" />
-          </div>
+        <div className="text-5xl font-cursive flex ml-16">
+          Boba Tracker
+          <img
+            src="https://i.imgur.com/ZAeNBty.png"
+            alt="..."
+            className="rounded max-w-full h-16 align-right ml-2"
+          />
+        </div>
         <div className="sm:h-18 h-16">
-          <div className="text-base font-cursive text-center">An easy way to track your monthly boba tea</div>
+          <div className="text-base font-cursive text-center">
+            An easy way to track your monthly boba tea
+          </div>
           <div className="text-base font-cursive text-center">purchases</div>
         </div>
-        <form className="outline-black bg-loginreg shadow-md p-12 mx-8" onSubmit={signUpHandler}>
+        <form
+          className="outline-black bg-loginreg shadow-md p-12 mx-8"
+          onSubmit={signUpHandler}
+        >
           <fieldset>
             {error && (
               <div className="p-2 bg-red-700 text-gray-100 text-center text-xl mb-4 rounded">
@@ -53,17 +62,12 @@ const Register = () => {
               </div>
             )}
             <div className="flex flex-col sm:flex-row items-baseline justify-center mb-4 w-full h-12">
-            <label
-                className="text-black text-2xl font-bold"
-              >
+              <label className="text-black text-2xl font-bold">
                 Create an account
               </label>
-              </div>
+            </div>
             <div className="items-baseline justify-between mb-2 w-full">
-              <label
-                className="text-black text-lg"
-                htmlFor="username"
-              >
+              <label className="text-black text-lg" htmlFor="username">
                 Email
               </label>
               <div className="mb-4 w-full mt-2">
@@ -101,15 +105,15 @@ const Register = () => {
             <div className="items-baseline justify-between mb-2 w-full">
               <label
                 className="text-black text-lg mb-2"
-                name="password"
-                htmlFor="password"
+                name="confirmation"
+                htmlFor="confirmation"
               >
                 Confirm Password
               </label>
               <div className="mb-4 w-full mt-2">
                 <input
-                  id="password"
-                  name="password"
+                  id="confirmation"
+                  name="confirmation"
                   type="password"
                   required
                   className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-2

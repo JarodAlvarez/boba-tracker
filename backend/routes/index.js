@@ -15,8 +15,8 @@ router.getAll = async (req, res) => {
 }
 //get a boba
 router.getOne = async (req, res) => {
-  console.log(req.params.boba_id);
-  const boba = await selectID(req.params.boba_id);
+  console.log(req.params.boba_id, req.params.drinkname);
+  const boba = await selectID(req.params.purchase_date, req.params.drinkname);
   if (boba == undefined) {
     res.status(404).send();
   } else {
@@ -28,10 +28,10 @@ router.post = async (req, res) => {
   try {
     console.log(req.body);
     const outBoba = {
-      'boba_id': req.body.boba_id,
-      'price': req.body.price,
+      'purchase_date': req.body.purchase_date,
       'drinkname': req.body.drinkname,
-      'description': req.body.description,
+      'price': req.body.price,
+      'sweetness': req.body.sweetness,
     };
     await insertBoba(outBoba);
     res.status(201).send(outBoba);
@@ -46,10 +46,10 @@ router.update = async (req, res) => {
   try {
     console.log(req.body);
     const upBoba = {
-      'boba_id': req.body.boba_id,
-      'price': req.body.price,
+      'purchase_date': req.body.purchase_date,
       'drinkname': req.body.drinkname,
-      'description': req.body.description,
+      'price': req.body.price,
+      'sweetness': req.body.sweetness,
     };
     await updateBoba(upBoba);
     res.status(201).send(upBoba);
@@ -62,8 +62,8 @@ router.update = async (req, res) => {
 //delete a boba
 router.del = async(req, res) => {
   try {
-    console.log(req.params.boba_id);
-    const boba = await deleteBoba(req.params.boba_id);
+    console.log(req.params.purchase_date, req.params.drinkname);
+    const boba = await deleteBoba(req.params.purchase_date, req.params.drinkname);
     res.status(200).send();
   } catch (err) {
     console.error(err.message);
@@ -83,40 +83,39 @@ selectBoba = async() => {
   return rows;
 };
 
-selectID = async(boba_id) => {
-  const select = 'SELECT * FROM boba_entries WHERE boba_id = $1';
+selectID = async(purchase_date, drinkname) => {
+  const select = 'SELECT * FROM boba_entries WHERE purchase_date = $1 AND drinkname = $2';
   const query = {
     text: select,
-    values: [boba_id],
+    values: [purchase_date, drinkname],
   };
   const {rows} = await pool.query(query);
-  console.log(boba_id);
   return rows.length == 1 ? rows : undefined;
 };
 
 insertBoba = async(boba) => {
-  const insert = 'INSERT INTO boba_entries(boba_id, price, drinkname, description) VALUES ($1, $2, $3, $4)';
+  const insert = 'INSERT INTO boba_entries(purchase_date, drinkname, price, sweetness) VALUES ($1, $2, $3, $4)';
   const query = {
     text: insert,
-    values: [boba.boba_id, boba.price, boba.drinkname, boba.description]
+    values: [boba.purchase_date, boba.drinkname, boba.price, boba.sweetness]
   };
   await pool.query(query);  
 };
 
 updateBoba = async(boba) => {
-  const update = 'UPDATE boba_entries SET price = $2, drinkname = $3, description = $4 WHERE boba_id = $1';
+  const update = 'UPDATE boba_entries SET price = $3, sweetness = $4 WHERE purchase_date = $1 AND drinkname = $2';
   const query = {
     text: update,
-    values: [boba.boba_id, boba.price, boba.drinkname, boba.description]
+    values: [boba.purchase_date, boba.drinkname, boba.price, boba.sweetness]
   };
   await pool.query(query);  
 };
 
-deleteBoba = async(boba_id) => {
-  const deletion = 'DELETE FROM boba_entries WHERE boba_id = $1';
+deleteBoba = async(purchase_date, drinkname) => {
+  const deletion = 'DELETE FROM boba_entries WHERE purchase_date = $1 AND drinkname = $2';
   const query = {
     text: deletion,
-    values: [boba_id],
+    values: [purchase_date, drinkname],
   };
   await pool.query(query);
 };
