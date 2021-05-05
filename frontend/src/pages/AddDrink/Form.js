@@ -59,6 +59,8 @@ const Form = ({submitForm}) => {
               name="sweetness"
               type="number"
               step="0.01"
+              min="0"
+              max="1"
               className={`w-full p-2 text-black border-2 rounded-md text-sm mb-4`}
               id="sweetness"
               placeholder="Value between 0 and 1"

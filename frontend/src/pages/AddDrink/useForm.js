@@ -20,6 +20,8 @@ const useForm = (callback, validate) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setErrors(validate(values))
+    setIsSubmitting(true)
 
     const data = {
       purchase_date: values.date,
@@ -27,7 +29,6 @@ const useForm = (callback, validate) => {
       price: values.price,
       sweetness: values.sweetness,
     };
-    console.log(data)
     fetch('http://localhost:3010/v0/boba', {
       method: 'POST',
       headers: {
@@ -46,7 +47,7 @@ const useForm = (callback, validate) => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback()
     }
-  }, [errors])
+  }, [errors]);
 
   return { handleChange, values, handleSubmit, errors }
 }
