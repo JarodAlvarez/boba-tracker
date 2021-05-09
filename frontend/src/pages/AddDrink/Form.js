@@ -15,11 +15,11 @@ const Form = ({submitForm}) => {
             <label htmlFor="date">Date Purchased</label>
             <input
               name="date"
-              type="date"
+              type="text"
               className={`w-full p-2 text-black border-2 rounded-md text-sm mb-4`}
               id="date"
               placeholder="mm/dd/yyyy"
-              value={values.date}
+              value={values.date || ""}
               onChange={handleChange}
             />
             {errors.date && <p class="text-center text-sm text-red-500">{errors.date}</p>}
@@ -32,7 +32,7 @@ const Form = ({submitForm}) => {
               className={`w-full p-2 text-black border-2 rounded-md text-sm mb-4`}
               id="drink"
               placeholder="Drink name"
-              value={values.drink}
+              value={values.drink || ""}
               onChange={handleChange}
             />
             {errors.drink && <p class="text-center text-sm text-red-500">{errors.drink}</p>}
@@ -43,10 +43,11 @@ const Form = ({submitForm}) => {
             <input
               name="price"
               type="number"
+              step="0.01"
               className={`w-full p-2 text-black border-2 rounded-md text-sm mb-4`}
               id="price"
               placeholder="Drink price"
-              value={values.price}
+              value={values.price || ""}
               onChange={handleChange}
             />
             {errors.price && <p class="text-center text-sm text-red-500">{errors.price}</p>}
@@ -56,11 +57,14 @@ const Form = ({submitForm}) => {
             <label htmlFor="sweetness">Sweetness Level</label>
             <input
               name="sweetness"
-              type="text"
+              type="number"
+              step="0.01"
+              min="0"
+              max="1"
               className={`w-full p-2 text-black border-2 rounded-md text-sm mb-4`}
               id="sweetness"
-              placeholder="Low Regular High"
-              value={values.sweetness}
+              placeholder="Value between 0 and 1"
+              value={values.sweetness || ""}
               onChange={handleChange}
             />
             {errors.sweetness && <p class="text-center text-sm text-red-500">{errors.sweetness}</p>}

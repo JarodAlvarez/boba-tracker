@@ -20,6 +20,7 @@ module.exports = {
       white: '#fff',
       loginreg: '#ebf6f5',
       logregbutton: '#5369ca',
+      historybox: '#faecd7',
       gray: {
         100: '#f7fafc',
         200: '#edf2f7',
@@ -270,6 +271,7 @@ module.exports = {
       thin: '200',
       light: '300',
       normal: '400',
+      normid: '450',
       medium: '500',
       semibold: '600',
       bold: '700',

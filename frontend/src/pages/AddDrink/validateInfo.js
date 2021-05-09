@@ -17,13 +17,6 @@ export default function validateInfo(values) {
 
     if(!values.sweetness){
         errors.sweetness = "Sweetness level required"
-    }else if(values.sweetness !== "low" 
-    && values.sweetness !== "regular" 
-    && values.sweetness !== "high"
-    && values.sweetness !== "Low" 
-    && values.sweetness !== "Regular" 
-    && values.sweetness !== "High"){
-        errors.sweetness = "Must be: low, regular, or high"
     }
 
     return errors;
