@@ -10,8 +10,13 @@ const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmation, setConfirmation] = useState('')
-  const [name, setName] = useState('')
   const [error, setError] = useState('')
+
+  const validateEmail = (email) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return re.test(String(email).toLowerCase())
+  }
 
   const onChangeHandler = (e) => {
     const { name, value } = e.currentTarget
@@ -23,7 +28,10 @@ const Register = () => {
   const signUpHandler = async (e) => {
     try {
       e.preventDefault()
-      if (confirmation !== password)
+      if (!validateEmail(email)) setError('INVALID EMAIL FORMAT')
+      else if (password.length < 6)
+        setError('PASSWORD MUST BE AT LEAST 6 CHARACTERS LONG')
+      else if (confirmation !== password)
         setError("PASSWORDS AND CONFIRMATION DON'T MATCH")
       else {
         setError('')

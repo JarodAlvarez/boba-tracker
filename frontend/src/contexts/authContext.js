@@ -88,8 +88,8 @@ export const AuthProvider = ({ children }) => {
       Cookies.set('userInfo', JSON.stringify(data), { expires: 7 })
       dispatch({ type: LOGIN_SUCCESS, payload: data })
     } catch (err) {
-      dispatch({ type: LOGIN_FAIL, payload: err.message })
-      throw err.message
+      dispatch({ type: LOGIN_FAIL, payload: err.response.data.error })
+      throw err.response.data.error
     } finally {
       console.log(authContext)
     }
@@ -100,9 +100,9 @@ export const AuthProvider = ({ children }) => {
     try {
       Cookies.remove('userInfo')
       dispatch({ type: LOGOUT_SUCCESS })
-    } catch (error) {
-      console.error(error)
-      throw error.message
+    } catch (err) {
+      console.error(err.response.data.error)
+      throw err.response.data.error
     }
   }
 
@@ -116,8 +116,8 @@ export const AuthProvider = ({ children }) => {
       Cookies.set('userInfo', JSON.stringify(data))
       dispatch({ type: REGISTER_SUCCESS, payload: data })
     } catch (err) {
-      dispatch({ type: REGISTER_FAIL, payload: err.message })
-      throw err.message
+      dispatch({ type: REGISTER_FAIL, payload: err.response.data.error })
+      throw err.response.data.error
     }
   }
 

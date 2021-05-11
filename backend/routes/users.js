@@ -65,7 +65,7 @@ router.post("/signIn", async (req, res) => {
         token: createToken(user),
       });
     } else {
-      res.status(401).send({});
+      res.status(401).send({ error: "Email or password is incorrect" });
     }
   } catch (err) {
     res.send(err);
@@ -90,7 +90,7 @@ router.post("/", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(404).send();
+    res.status(404).send({ error: "This email has already been registered" });
   }
 });
 
@@ -113,7 +113,6 @@ checkPassword = async (email, password) => {
   };
   try {
     const { rows } = await pool.query(query);
-    console.log("rows: ", rows);
     return rows.length == 1 ? rows : undefined;
   } catch (e) {
     console.log(e);
