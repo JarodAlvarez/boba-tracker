@@ -90,7 +90,7 @@ router.post("/", async (req, res) => {
     });
   } catch (err) {
     console.error(err.message);
-    res.status(404).send();
+    res.status(404).send({ error: "This email has already been registered" });
   }
 });
 
