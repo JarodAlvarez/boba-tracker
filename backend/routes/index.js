@@ -115,7 +115,7 @@ selectUser = async(email) => {
   };
   console.log(query);
   const {rows} = await pool.query(query);
-  return rows.length == 1 ? rows : undefined;
+  return rows.length >= 1 ? rows : undefined;
 };
 
 insertBoba = async(boba) => {
