@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useAuth } from 'contexts/authContext'
 import ReactDOMServer from 'react-dom/server'
 
 
@@ -8,7 +9,8 @@ const History = () => {
     const [error, setError] = React.useState(null);
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [bobas, setBobas] = React.useState([]);
-
+    const authContext = useAuth()
+    console.log(authContext.authContext.user.email);
     React.useEffect(() => {
         fetch("http://localhost:3010/v0/boba")
             .then(res => res.json())
