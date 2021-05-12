@@ -1,15 +1,16 @@
 import React from 'react'
 import SpendingChart from '../../components/spendingChart'
-
+import { useAuth } from 'contexts/authContext'
 
 const Dashboard = () => {
     // https://reactjs.org/docs/faq-ajax.html
     const [error, setError] = React.useState(null);
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [bobas, setBobas] = React.useState([]);
-
+    const authContext = useAuth();
+    const call = "http://localhost:3010/v0/boba/" + authContext.authContext.user.email;  
     React.useEffect(() => {
-        fetch("http://localhost:3010/v0/boba")
+        fetch(call)
             .then(res => res.json())
             .then(
                 (result) => {
@@ -46,6 +47,7 @@ const Dashboard = () => {
         let drinksBought = bobas.length;
         return (
             <div>
+                <h1 class="text-center">Welcome {authContext.authContext.user.email}!</h1>
                 <div class="flex justify-evenly m-10 text-center ">
                     <div
                         class="border-2 border-indigo-600 bg-blue-200 rounded-lg p-6 m-2 w-1/6 cursor-pointer"
