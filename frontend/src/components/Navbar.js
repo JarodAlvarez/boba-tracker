@@ -24,7 +24,7 @@ const Navbar = () => {
             </Nav.Item>
             <Nav.Item className="px-4">
               <Nav.Link href="/history" eventKey="link-2">
-                Histoy
+                History
               </Nav.Link>
             </Nav.Item>
             <Nav.Item className="px-4">
