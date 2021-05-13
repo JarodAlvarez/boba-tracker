@@ -13,21 +13,31 @@ const Register = () => {
   const [name, setName] = useState('')
   const [error, setError] = useState('')
 
+  const validateEmail = (email) => {
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return re.test(String(email).toLowerCase())
+  }
+
   const onChangeHandler = (e) => {
     const { name, value } = e.currentTarget
     if (name === 'email') setEmail(value)
     else if (name === 'password') setPassword(value)
     else if (name === 'confirmation') setConfirmation(value)
+    else if (name === 'name') setName(value)
   }
 
   const signUpHandler = async (e) => {
     try {
       e.preventDefault()
-      if (confirmation !== password)
+      if (!validateEmail(email)) setError('INVALID EMAIL FORMAT')
+      else if (password.length < 6)
+        setError('PASSWORD MUST BE AT LEAST 6 CHARACTERS LONG')
+      else if (confirmation !== password)
         setError("PASSWORDS AND CONFIRMATION DON'T MATCH")
       else {
         setError('')
-        await authContext.signUp(email, password)
+        await authContext.signUp(name, email, password)
       }
     } catch (err) {
       setError(err)
@@ -67,7 +77,23 @@ const Register = () => {
               </label>
             </div>
             <div className="items-baseline justify-between mb-2 w-full">
-              <label className="text-black text-lg" htmlFor="username">
+              <label className="text-black text-lg" htmlFor="name">
+                Name
+              </label>
+              <div className="mb-4 w-full mt-2">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  required
+                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-3
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
+                  onChange={onChangeHandler}
+                />
+              </div>
+            </div>
+            <div className="items-baseline justify-between mb-2 w-full">
+              <label className="text-black text-lg" htmlFor="email">
                 Email
               </label>
               <div className="mb-4 w-full mt-2">
