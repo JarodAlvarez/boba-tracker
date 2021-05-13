@@ -52,7 +52,7 @@ const initialState = {
 const AuthContext = React.createContext({
   updateUser: () => {},
   logout: async () => {},
-  signUp: async (email, password, username) => {},
+  signUp: async (name, email, password) => {},
   logIn: async (email, password) => {},
 })
 
@@ -106,12 +106,13 @@ export const AuthProvider = ({ children }) => {
     }
   }
 
-  const signUp = async (email, password) => {
-    dispatch({ type: REGISTER_REQUEST, payload: { email, password } })
+  const signUp = async (name, email, password) => {
+    dispatch({ type: REGISTER_REQUEST, payload: { name, email, password } })
     try {
       const { data } = await axios.post('http://localhost:3010/users/', {
         email,
         password,
+        name,
       })
       Cookies.set('userInfo', JSON.stringify(data))
       dispatch({ type: REGISTER_SUCCESS, payload: data })
