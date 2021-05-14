@@ -147,7 +147,7 @@ createTable = async () => {
 };
 
 // alterTable = async () => {
-//   await pool.query("ALTER TABLE users ADD COLUMN name text");
+//   await pool.query("ALTER TABLE users ALTER COLUMN name SET NOT NULl");
 // };
 
 dropTable = async () => {
