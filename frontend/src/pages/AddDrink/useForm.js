@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-
+import { useAuth } from 'contexts/authContext'
 const useForm = (callback, validate) => {
+  const authContext = useAuth()
   const [values, setValues] = useState({
     date: '',
     drink: '',
@@ -28,6 +29,7 @@ const useForm = (callback, validate) => {
       drinkname: values.drink,
       price: values.price,
       sweetness: values.sweetness,
+      email: authContext.authContext.user.email,
     };
     fetch('http://localhost:3010/v0/boba', {
       method: 'POST',

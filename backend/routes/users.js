@@ -65,7 +65,7 @@ router.post("/signIn", async (req, res) => {
         token: createToken(user),
       });
     } else {
-      res.status(401).send({});
+      res.status(401).send({ error: "Email or password is incorrect" });
     }
   } catch (err) {
     res.send(err);
@@ -79,6 +79,7 @@ router.post("/", async (req, res) => {
     const outuser = {
       password: req.body.password,
       email: req.body.email,
+      name: req.body.name,
     };
     await insertUser(outuser);
     const userRow = await checkPassword(req.body.email, req.body.password);
@@ -86,11 +87,12 @@ router.post("/", async (req, res) => {
     res.status(201).send({
       _id: user.id,
       email: user.email,
+      name: user.name,
       token: createToken(user),
     });
   } catch (err) {
     console.error(err.message);
-    res.status(404).send();
+    res.status(404).send({ error: "This email has already been registered" });
   }
 });
 
@@ -113,7 +115,6 @@ checkPassword = async (email, password) => {
   };
   try {
     const { rows } = await pool.query(query);
-    console.log("rows: ", rows);
     return rows.length == 1 ? rows : undefined;
   } catch (e) {
     console.log(e);
@@ -122,10 +123,10 @@ checkPassword = async (email, password) => {
 };
 
 insertUser = async (user) => {
-  const insert = "INSERT INTO users(password, email) VALUES ($1, $2)";
+  const insert = "INSERT INTO users(password, email, name) VALUES ($1, $2, $3)";
   const query = {
     text: insert,
-    values: [user.password, user.email],
+    values: [user.password, user.email, user.name],
   };
   await pool.query(query);
 };
@@ -141,9 +142,13 @@ updateUser = async (user) => {
 
 createTable = async () => {
   await pool.query(
-    "CREATE TABLE users(id SERIAL, email text NOT NULL UNIQUE, password text NOT NULL)"
+    "CREATE TABLE users(id SERIAL, email text NOT NULL UNIQUE, password text NOT NULL, name text)"
   );
 };
+
+// alterTable = async () => {
+//   await pool.query("ALTER TABLE users ALTER COLUMN name SET NOT NULl");
+// };
 
 dropTable = async () => {
   await pool.query("DROP TABLE users");

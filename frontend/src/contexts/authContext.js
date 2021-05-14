@@ -52,7 +52,7 @@ const initialState = {
 const AuthContext = React.createContext({
   updateUser: () => {},
   logout: async () => {},
-  signUp: async (email, password, username) => {},
+  signUp: async (name, email, password) => {},
   logIn: async (email, password) => {},
 })
 
@@ -88,8 +88,8 @@ export const AuthProvider = ({ children }) => {
       Cookies.set('userInfo', JSON.stringify(data), { expires: 7 })
       dispatch({ type: LOGIN_SUCCESS, payload: data })
     } catch (err) {
-      dispatch({ type: LOGIN_FAIL, payload: err.message })
-      throw err.message
+      dispatch({ type: LOGIN_FAIL, payload: err.response.data.error })
+      throw err.response.data.error
     } finally {
       console.log(authContext)
     }
@@ -100,24 +100,25 @@ export const AuthProvider = ({ children }) => {
     try {
       Cookies.remove('userInfo')
       dispatch({ type: LOGOUT_SUCCESS })
-    } catch (error) {
-      console.error(error)
-      throw error.message
+    } catch (err) {
+      console.error(err.response.data.error)
+      throw err.response.data.error
     }
   }
 
-  const signUp = async (email, password) => {
-    dispatch({ type: REGISTER_REQUEST, payload: { email, password } })
+  const signUp = async (name, email, password) => {
+    dispatch({ type: REGISTER_REQUEST, payload: { name, email, password } })
     try {
       const { data } = await axios.post('http://localhost:3010/users/', {
         email,
         password,
+        name,
       })
       Cookies.set('userInfo', JSON.stringify(data))
       dispatch({ type: REGISTER_SUCCESS, payload: data })
     } catch (err) {
-      dispatch({ type: REGISTER_FAIL, payload: err.message })
-      throw err.message
+      dispatch({ type: REGISTER_FAIL, payload: err.response.data.error })
+      throw err.response.data.error
     }
   }
 
