@@ -30,6 +30,7 @@ const History = () => {
   const deleteHandler = (id) => async (e) => {
     try {
       e.preventDefault()
+      console.log(id)
       await axios
         .delete(`http://localhost:3010/v0/boba/${id}`, {
           headers: {
@@ -37,13 +38,12 @@ const History = () => {
           },
           params: { isAdmin: authContext.user.isAdmin },
         })
-        .then(() =>
-          axios
-            .get(`http://localhost:3010/v0/boba/${authContext.user.email}`)
-            .then(({ data }) => {
-              setBobas(data)
-            })
-        )
+        .then(() => {
+          var deleteIdx = bobas.findIndex((i) => i.id === id)
+          var tempBoba = [...bobas]
+          tempBoba.splice(deleteIdx, 1)
+          setBobas(tempBoba)
+        })
     } catch (err) {
       setError(err.response)
       console.log(err.response)
@@ -73,10 +73,13 @@ const History = () => {
           Sweetness level: {entry.sweetness}
         </div>
         <div className="flex justify-between mt-2">
-          <button className="bg-gray-200 p-2" onClick={deleteHandler}>
+          <button className="bg-gray-200 p-2" onClick={editHandler(entry.id)}>
             Edit
           </button>
-          <button className="bg-purple-300 p-2" onClick={editHandler}>
+          <button
+            className="bg-purple-300 p-2"
+            onClick={deleteHandler(entry.id)}
+          >
             Delete
           </button>
         </div>

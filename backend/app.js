@@ -68,6 +68,6 @@ app.post("/v0/boba", indexRouter.post);
 //update a boba
 app.put("/v0/boba", indexRouter.update);
 //delete a boba
-app.delete("/v0/boba/:purchase_date/:drinkname/:email", indexRouter.del);
+app.delete("/v0/boba/:id", indexRouter.del);
 
 module.exports = app;
