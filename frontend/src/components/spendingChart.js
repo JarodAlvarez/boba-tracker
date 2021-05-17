@@ -164,10 +164,13 @@ const SpendingChart = () => {
     const [error, setError] = React.useState(null);
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [bobas, setBobas] = React.useState([]);
+    // const [dateSpendings, setDateSpendings] = React.useState([0,0,0,0,0,0,0]);
     const authContext = useAuth();
     const call = "http://localhost:3010/v0/boba/" + authContext.authContext.user.email;
     var date_spendings = [0,0,0,0,0,0,0];
+    let newChartInstance = '';
 
+    console.log("reloaded");
     useEffect(() => {
         fetch(call)
             .then(res => res.json())
@@ -179,7 +182,10 @@ const SpendingChart = () => {
                         date_spendings[index] = date_spendings[index] + result[i].price;
                     }
                     setIsLoaded(true);
+                    console.log("set??");
+                    // setDateSpendings(date_spendings);
                     setBobas(result);
+                    newChartInstance.update();
                     console.log(result);
                 },
                 // Note: it's important to handle errors here
@@ -236,9 +242,9 @@ const SpendingChart = () => {
 
 
         if (chartContainer && chartContainer.current) {
-            const newChartInstance = new Chart(chartContainer.current, chartConfig);
+            newChartInstance = new Chart(chartContainer.current, chartConfig);
             setChartInstance(newChartInstance);
-            newChartInstance.update();
+            // newChartInstance.update();
         }
     }, [chartContainer]);
 
