@@ -6,14 +6,12 @@ Chart.register(...registerables);
 
 const SpendingChart = () => {
     const chartContainer = useRef(null);
-    const [chartInstance, setChartInstance] = useState(null);
     const [error, setError] = React.useState(null);
     const authContext = useAuth();
     const call = "http://localhost:3010/v0/boba/" + authContext.authContext.user.email;
     var date_spendings = [0, 0, 0, 0, 0, 0, 0];
     let newChartInstance = '';
 
-    console.log("reloaded");
     useEffect(() => {
         fetch(call)
             .then(res => res.json())
