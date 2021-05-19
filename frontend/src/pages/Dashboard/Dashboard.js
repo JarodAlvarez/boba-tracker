@@ -29,6 +29,7 @@ const Dashboard = () => {
 
     // calc total of $$ spent and suagr consumed
     let i;
+    let counter = 0
     var price = 0.0;
     var sugar = 0.0
     for (i in bobas) {
@@ -36,7 +37,9 @@ const Dashboard = () => {
         sugar = Number(sugar) + Number(bobas[i].sweetness)
         price = price.toFixed(2);
         sugar = sugar.toFixed(2);
+        counter ++;
     }
+    sugar = sugar / counter;
 
 
     if (error) {
@@ -64,7 +67,7 @@ const Dashboard = () => {
                     </div>
                     <div class="border-2 border-red-600 bg-red-200 rounded-lg p-6 m-2 w-1/6 cursor-pointer"
                     >
-                        <div>Sugar consumed</div>
+                        <div>Average Sweetness</div>
                         <div>{sugar}</div>
                     </div>
 

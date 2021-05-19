@@ -10,7 +10,7 @@ const SpendingChart = () => {
     const [error, setError] = React.useState(null);
     const authContext = useAuth();
     const call = "http://localhost:3010/v0/boba/" + authContext.authContext.user.email;
-    var date_spendings = [0,0,0,0,0,0,0];
+    var date_spendings = [0, 0, 0, 0, 0, 0, 0];
     let newChartInstance = '';
 
     console.log("reloaded");
@@ -21,8 +21,19 @@ const SpendingChart = () => {
                 (result) => {
                     for (var i in result) {
                         var date = new Date(result[i].purchase_date);
-                        var index = Number(date.getDay());
-                        date_spendings[index] = date_spendings[index] + result[i].price;
+                        // calculate the current week only 
+                        const today = new Date();
+                        const todayDate = today.getDate(); // 1-31
+                        const todayDay = today.getDay(); // 0-6
+                        const firstDayOfWeek = new Date(today.setDate(todayDate - todayDay));
+                        const lastDayOfWeek = new Date(firstDayOfWeek);
+                        lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+
+                        if (date >= firstDayOfWeek && date <= lastDayOfWeek) {
+                            var index = Number(date.getDay());
+                            date_spendings[index] = date_spendings[index] + result[i].price;
+                        }
+
                     }
                     newChartInstance.update();
                 },
@@ -39,7 +50,7 @@ const SpendingChart = () => {
             data: {
                 labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 datasets: [{
-                    label: ' $ Spending',
+                    label: ' $ Spendings for this week in USD',
                     data: date_spendings,
                     backgroundColor: [
                         'rgba(236, 220, 194, 0.7)'
@@ -58,13 +69,13 @@ const SpendingChart = () => {
             },
             options: {
                 scales: {
-                    yAxes: [
-                        {
-                            ticks: {
-                                beginAtZero: false
-                            }
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: '$$ spent'
                         }
-                    ]
+
+                    }]
                 }
             }
         };
