@@ -8,9 +8,6 @@ const SpendingChart = () => {
     const chartContainer = useRef(null);
     const [chartInstance, setChartInstance] = useState(null);
     const [error, setError] = React.useState(null);
-    const [isLoaded, setIsLoaded] = React.useState(false);
-    const [bobas, setBobas] = React.useState([]);
-    // const [dateSpendings, setDateSpendings] = React.useState([0,0,0,0,0,0,0]);
     const authContext = useAuth();
     const call = "http://localhost:3010/v0/boba/" + authContext.authContext.user.email;
     var date_spendings = [0,0,0,0,0,0,0];
@@ -27,18 +24,12 @@ const SpendingChart = () => {
                         var index = Number(date.getDay());
                         date_spendings[index] = date_spendings[index] + result[i].price;
                     }
-                    setIsLoaded(true);
-                    console.log("set??");
-                    // setDateSpendings(date_spendings);
-                    setBobas(result);
                     newChartInstance.update();
-                    console.log(result);
                 },
                 // Note: it's important to handle errors here
                 // instead of a catch() block so that we don't swallow
                 // exceptions from actual bugs in components.
                 (error) => {
-                    setIsLoaded(true);
                     setError(error);
                 }
             )
@@ -49,14 +40,6 @@ const SpendingChart = () => {
                 labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
                 datasets: [{
                     label: ' $ Spending',
-                    // data: [
-                    //     2,
-                    //     20,
-                    //     31.50,
-                    //     11,
-                    //     14,
-                    //     21
-                    // ],
                     data: date_spendings,
                     backgroundColor: [
                         'rgba(236, 220, 194, 0.7)'
@@ -90,14 +73,8 @@ const SpendingChart = () => {
         if (chartContainer && chartContainer.current) {
             newChartInstance = new Chart(chartContainer.current, chartConfig);
             setChartInstance(newChartInstance);
-            // newChartInstance.update();
         }
     }, [chartContainer]);
-
-    const updateDataset = (datasetIndex, newData) => {
-        chartInstance.data.datasets[datasetIndex].data = newData;
-        chartInstance.update();
-    };
 
     return (
         <div>
