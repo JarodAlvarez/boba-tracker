@@ -65,23 +65,11 @@ const SpendingChart = () => {
                 }
                 ]
             },
-            options: {
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: '$$ spent'
-                        }
-
-                    }]
-                }
-            }
         };
 
 
         if (chartContainer && chartContainer.current) {
             newChartInstance = new Chart(chartContainer.current, chartConfig);
-            setChartInstance(newChartInstance);
         }
     }, [chartContainer]);
 
