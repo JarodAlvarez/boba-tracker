@@ -1,5 +1,6 @@
 import React from 'react'
 import SpendingChart from '../../components/spendingChart'
+import SugarChart from '../../components/sugarChart'
 import { useAuth } from 'contexts/authContext'
 
 const Dashboard = () => {
@@ -32,6 +33,25 @@ const Dashboard = () => {
     let counter = 0
     var price = 0.0;
     var sugar = 0.0
+    var box1 = {
+        boxShadow: "3px 3px 4px #9E9E9E",
+        "border-radius": "45px",
+        "background-color": "#F4DCCC"
+    }
+    var box2 = {
+        boxShadow: "3px 3px 4px #9E9E9E",
+        "border-radius": "45px",
+        "background-color": "#F6DE88"
+    }
+    var box3 = {
+        boxShadow: "3px 3px 4px #9E9E9E",
+        "border-radius": "45px",
+        "background-color": "#F6F899"
+    }
+    var bgIMG = {
+        "background-image": "linear-gradient(45deg, #F6F6CD, #E7E0E0)",
+        "height": "100vh"
+    }
     for (i in bobas) {
         price = Number(price) + Number(bobas[i].price);
         sugar = Number(sugar) + Number(bobas[i].sweetness)
@@ -50,32 +70,45 @@ const Dashboard = () => {
         let drinksBought = bobas.length;
         return (
             <div>
-                <h1 class="text-center">Welcome {authContext.authContext.user.email}!</h1>
-                <div class="flex justify-evenly m-10 text-center ">
+                <div
+                    class="bg-purple-200"
+                >
+                <h1 class="text-left text-5xl pl-10">Welcome {authContext.authContext.user.email}!</h1>
+                <div class="flex justify-evenly m-10 text-center text-white">
                     <div
-                        class="border-2 border-indigo-600 bg-blue-200 rounded-lg p-6 m-2 w-1/6 cursor-pointer"
+                        class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
                     >
-                        <div>Drinks Bought</div>
-                        <div>{drinksBought}</div>
+                        <div class="text-lg">Drinks Bought</div>
+                        <div class="text-2xl font-bold">{drinksBought}</div>
                         {/* {console.log(price)} */}
 
                     </div>
-                    <div class="border-2 border-yellow-600 bg-yellow-200 rounded-lg p-6 m-2 w-1/6 cursor-pointer"
+                    <div
+                        class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
                     >
-                        <div>Money Spent</div>
-                        <div>{price}</div>
+                        <div class="text-lg">Money Spent</div>
+                        <div class="text-2xl font-bold">${price}</div>
                     </div>
-                    <div class="border-2 border-red-600 bg-red-200 rounded-lg p-6 m-2 w-1/6 cursor-pointer"
+                    <div
+                        class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
                     >
-                        <div>Average Sweetness</div>
-                        <div>{sugar}</div>
+                        <div class="text-lg">Average Sweetness</div>
+                        <div class="text-2xl font-bold">{(sugar * 100).toFixed(2)}%</div>
                     </div>
 
                 </div>
-                <div class=" object-contain container mx-auto p-12">
-                    <SpendingChart />
+                <div class="text-center grid xl:grid-cols-2 sm:grid-cols-1 gap-4 px-12">
+                    <div class="border-0 bg-white rounded-lg px-4 h-1/5 shadow-md">
+                        <SpendingChart />
+                    </div>
+                    <div class="border-0 bg-white rounded-lg px-4 h-1/5 shadow-md">
+                        <SugarChart />
+                    </div>
                 </div>
             </div>
+         
+            </div>
+            
         )
     }
 
