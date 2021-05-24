@@ -28,6 +28,7 @@ const SpendingChart = () => {
                         const firstDayOfWeek = new Date(today.setDate(todayDate - todayDay));
                         const lastDayOfWeek = new Date(firstDayOfWeek);
                         lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+                        firstDayOfWeek.setHours(0,0,0,0);
 
                         if (date >= firstDayOfWeek && date <= lastDayOfWeek) {
                             var index = Number(date.getDay());
