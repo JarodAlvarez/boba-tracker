@@ -9,7 +9,7 @@ const Dashboard = () => {
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [bobas, setBobas] = React.useState([]);
     const authContext = useAuth();
-    const call = "http://localhost:3010/v0/boba/" + authContext.authContext.user.email;  
+    const call = "http://localhost:3010/v0/boba/" + authContext.authContext.user.email;
     React.useEffect(() => {
         fetch(call)
             .then(res => res.json())
@@ -30,36 +30,34 @@ const Dashboard = () => {
 
     // calc total of $$ spent and suagr consumed
     let i;
-    let counter = 0
+    let drinks = 0
     var price = 0.0;
     var sugar = 0.0
-    var box1 = {
-        boxShadow: "3px 3px 4px #9E9E9E",
-        "border-radius": "45px",
-        "background-color": "#F4DCCC"
-    }
-    var box2 = {
-        boxShadow: "3px 3px 4px #9E9E9E",
-        "border-radius": "45px",
-        "background-color": "#F6DE88"
-    }
-    var box3 = {
-        boxShadow: "3px 3px 4px #9E9E9E",
-        "border-radius": "45px",
-        "background-color": "#F6F899"
-    }
-    var bgIMG = {
-        "background-image": "linear-gradient(45deg, #F6F6CD, #E7E0E0)",
-        "height": "100vh"
-    }
     for (i in bobas) {
-        price = Number(price) + Number(bobas[i].price);
-        sugar = Number(sugar) + Number(bobas[i].sweetness)
-        price = price.toFixed(2);
-        sugar = sugar.toFixed(2);
-        counter ++;
+        var date = new Date(bobas[i].purchase_date);
+        // calculate the current week only 
+        const today = new Date();
+        const todayDate = today.getDate(); // 1-31
+        const todayDay = today.getDay(); // 0-6
+        const firstDayOfWeek = new Date(today.setDate(todayDate - todayDay));
+        const lastDayOfWeek = new Date(firstDayOfWeek);
+        lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+        firstDayOfWeek.setHours(0, 0, 0, 0);
+        //console.log(firstDayOfWeek);
+        //console.log(lastDayOfWeek);
+        if (date >= firstDayOfWeek && date <= lastDayOfWeek) {
+            price = Number(price) + Number(bobas[i].price);
+            sugar = Number(sugar) + Number(bobas[i].sweetness)
+            price = price.toFixed(2);
+            drinks++;
+        }
     }
-    sugar = sugar / counter;
+    console.log(authContext.authContext.user)
+    if (drinks != 0) {
+        sugar = sugar / drinks;
+    }
+    let drinksBoughtThisWeek = drinks;
+    sugar = sugar.toFixed(2);
 
 
     if (error) {
@@ -67,48 +65,47 @@ const Dashboard = () => {
     } else if (!isLoaded) {
         return <div>Loading ...</div>
     } else {
-        let drinksBought = bobas.length;
         return (
             <div>
                 <div
                     class="bg-purple-200"
                 >
-                <h1 class="text-left text-5xl pl-10">Welcome {authContext.authContext.user.email}!</h1>
-                <div class="flex justify-evenly m-10 text-center text-white">
-                    <div
-                        class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
-                    >
-                        <div class="text-lg">Drinks Bought</div>
-                        <div class="text-2xl font-bold">{drinksBought}</div>
-                        {/* {console.log(price)} */}
+                    <h1 class="text-center sm:text-left text-3xl sm:text-5xl sm:pl-10">Welcome {authContext.authContext.user.name}!</h1>
+                    <div class="flex justify-evenly m-10 text-center text-white">
+                        <div
+                            class="border-0 bg-purple-500 rounded-full shadow-md p-3 sm:p-6 m-4 sm:w-1/4"
+                        >
+                            <div class="text-lg">Drinks Bought This Week</div>
+                            <div class="text-2xl font-bold">{drinksBoughtThisWeek}</div>
+                            {/* {console.log(price)} */}
+
+                        </div>
+                        <div
+                            class="border-0 bg-purple-500 rounded-full shadow-md p-3 sm:p-6 m-4 sm:w-1/4"
+                        >
+                            <div class="text-lg">Money Spent</div>
+                            <div class="text-2xl font-bold">${price}</div>
+                        </div>
+                        <div
+                            class="border-0 bg-purple-500 rounded-full shadow-md p-3 sm:p-6 m-4 sm:w-1/4"
+                        >
+                            <div class="text-lg">Average Sweetness</div>
+                            <div class="text-2xl font-bold">{(sugar * 100).toFixed(2)}%</div>
+                        </div>
 
                     </div>
-                    <div
-                        class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
-                    >
-                        <div class="text-lg">Money Spent</div>
-                        <div class="text-2xl font-bold">${price}</div>
+                    <div class="text-center grid xl:grid-cols-2 sm:grid-cols-1 gap-4 px-4 sm:px-12">
+                        <div class="border-1 bg-white rounded-lg sm:p-4 h-1/5 shadow-md">
+                            <SpendingChart />
+                        </div>
+                        <div class="border-1 bg-white rounded-lg sm:p-4 h-1/5 shadow-md">
+                            <SugarChart />
+                        </div>
                     </div>
-                    <div
-                        class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
-                    >
-                        <div class="text-lg">Average Sweetness</div>
-                        <div class="text-2xl font-bold">{(sugar * 100).toFixed(2)}%</div>
-                    </div>
+                </div>
 
-                </div>
-                <div class="text-center grid xl:grid-cols-2 sm:grid-cols-1 gap-4 px-12">
-                    <div class="border-0 bg-white rounded-lg px-4 h-1/5 shadow-md">
-                        <SpendingChart />
-                    </div>
-                    <div class="border-0 bg-white rounded-lg px-4 h-1/5 shadow-md">
-                        <SugarChart />
-                    </div>
-                </div>
             </div>
-         
-            </div>
-            
+
         )
     }
 

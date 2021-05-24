@@ -20,7 +20,7 @@ const SugarChart = () => {
             .then(
                 (result) => {
                     for (var i in result) {
-                        console.log(result[i]);
+                        //console.log(result[i]);
                         if(result[i].sweetness == 0) {
                             sug_spendings[0]++;
                         } else if (result[i].sweetness == 0.25) {

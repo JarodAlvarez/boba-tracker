@@ -28,8 +28,8 @@ const SpendingChart = () => {
                         const firstDayOfWeek = new Date(today.setDate(todayDate - todayDay));
                         const lastDayOfWeek = new Date(firstDayOfWeek);
                         lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
-
-                        if (date >= firstDayOfWeek && date <= lastDayOfWeek) {
+                        if (date.toISOString().split('T')[0] >= firstDayOfWeek.toISOString().split('T')[0] && 
+                            date.toISOString().split('T')[0] <= lastDayOfWeek.toISOString().split('T')[0]) {
                             var index = Number(date.getDay());
                             date_spendings[index] = date_spendings[index] + result[i].price;
                         }
