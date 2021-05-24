@@ -63,6 +63,7 @@ router.post("/signIn", async (req, res) => {
         _id: user.id,
         email: user.email,
         token: createToken(user),
+        name: user.name,
       });
     } else {
       res.status(401).send({ error: "Email or password is incorrect" });
