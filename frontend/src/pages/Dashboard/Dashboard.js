@@ -36,10 +36,10 @@ const Dashboard = () => {
         price = Number(price) + Number(bobas[i].price);
         sugar = Number(sugar) + Number(bobas[i].sweetness)
         price = price.toFixed(2);
-        sugar = sugar.toFixed(2);
         counter ++;
     }
     sugar = sugar / counter;
+    sugar = sugar.toFixed(2);
 
 
     if (error) {

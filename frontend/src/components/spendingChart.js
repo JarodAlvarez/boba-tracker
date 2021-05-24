@@ -19,6 +19,7 @@ const SpendingChart = () => {
                 (result) => {
                     for (var i in result) {
                         var date = new Date(result[i].purchase_date);
+                        console.log(date);
                         // calculate the current week only 
                         const today = new Date();
                         const todayDate = today.getDate(); // 1-31
@@ -26,8 +27,12 @@ const SpendingChart = () => {
                         const firstDayOfWeek = new Date(today.setDate(todayDate - todayDay));
                         const lastDayOfWeek = new Date(firstDayOfWeek);
                         lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+                        firstDayOfWeek.setHours(0,0,0,0);
+                        console.log("first day of week " + firstDayOfWeek);
+                        console.log("last day of week " + lastDayOfWeek);
 
                         if (date >= firstDayOfWeek && date <= lastDayOfWeek) {
+                            console.log(date);
                             var index = Number(date.getDay());
                             date_spendings[index] = date_spendings[index] + result[i].price;
                         }
