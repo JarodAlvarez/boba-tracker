@@ -51,10 +51,11 @@ const Dashboard = () => {
             drinks++;
         }
     }
-    sugar = sugar / drinks;
     let drinksBoughtThisWeek = drinks;
-    sugar = sugar.toFixed(2);
-
+    if (drinks != 0) {
+        sugar = sugar / drinks;
+        sugar = sugar.toFixed(2);
+    }
 
     if (error) {
         return <div>Error: {error.message}</div>
@@ -66,14 +67,13 @@ const Dashboard = () => {
                 <div
                     class="bg-purple-200"
                 >
-                    <h1 class="text-left text-5xl pl-10">Welcome {authContext.authContext.user.email}!</h1>
+                    <h1 class="text-left text-5xl pl-10">Welcome {authContext.authContext.user.name}!</h1>
                     <div class="flex justify-evenly m-10 text-center text-white">
                         <div
                             class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
                         >
                             <div class="text-lg">Drinks Bought This Week</div>
                             <div class="text-2xl font-bold">{drinksBoughtThisWeek}</div>
-                            {/* {console.log(price)} */}
 
                         </div>
                         <div
