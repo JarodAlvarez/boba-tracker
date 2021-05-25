@@ -6,6 +6,7 @@ import Register from 'pages/Register/Register'
 import AddDrink from 'pages/AddDrink/AddDrink'
 import History from 'pages/History/History'
 import Error from 'pages/Error/Error'
+import Edit_History from 'pages/History/Edit'
 
 const config = [
   {
@@ -43,6 +44,11 @@ const config = [
   {
     path: routePaths.ERROR,
     component: Error,
+  },
+  {
+    path: routePaths.EDIT_HISTORY,
+    authOnly: true,
+    component: Edit_History,
   },
 ]
 

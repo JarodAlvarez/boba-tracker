@@ -12,6 +12,8 @@ const HISTORY = '/history'
 
 const ERROR = '/error'
 
+const EDIT_HISTORY = `/edit/:id`
+
 export default {
   HISTORY,
   LOGIN,
@@ -20,4 +22,5 @@ export default {
   DASHBOARD,
   ADDDRINK,
   ERROR,
+  EDIT_HISTORY
 }
