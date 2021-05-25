@@ -1,5 +1,6 @@
 import { useAuth } from 'contexts/authContext'
 import React, { useState, useEffect } from 'react'
+import {Link} from 'react-router-dom';
 const axios = require('axios')
 
 const History = () => {
@@ -50,7 +51,16 @@ const History = () => {
     }
   }
 
-  const editHandler = (id) => async (e) => {}
+  const editHandler = (id) => async (e) => {
+    return <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  required
+                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-3
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
+                />
+  }
 
   // calc total of $$ spent
 
@@ -73,9 +83,9 @@ const History = () => {
           Sweetness level: {entry.sweetness}
         </div>
         <div className="flex justify-between mt-2">
-          <button className="bg-gray-200 p-2" onClick={editHandler(entry.id)}>
+          <Link className="btn bg-gray-200 p-2" to={`edit/${entry.id}`}>
             Edit
-          </button>
+          </Link>
           <button
             className="bg-purple-300 p-2"
             onClick={deleteHandler(entry.id)}

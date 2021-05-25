@@ -4,6 +4,7 @@ const app = require("../app");
 var router = express.Router();
 const pool = require("../db");
 
+
 //app.use(express.json()) // => req.body
 
 //ROUTES//
@@ -14,6 +15,21 @@ router.getAll = async (req, res) => {
   res.status(200).json(bobas);
 };
 //get a boba
+router.getBoba = async (req, res) => {
+  //console.log("odddddddddk");
+  //console.log(req.params.id);
+  const boba = await selectByID(
+    req.params.id
+  );
+  console.log(boba)
+  if (boba == undefined) {
+    res.status(404).send();
+  } else {
+    res.status(200).json(boba);
+  }
+};
+
+
 router.getOne = async (req, res) => {
   console.log(req.params.boba_id, req.params.drinkname, req.params.email);
   const boba = await selectID(
@@ -27,6 +43,7 @@ router.getOne = async (req, res) => {
     res.status(200).json(boba);
   }
 };
+
 //get all bobas for one user
 router.getUsersDrinks = async (req, res) => {
   console.log(req.params.email);
@@ -59,14 +76,14 @@ router.post = async (req, res) => {
 
 //update a boba
 router.update = async (req, res) => {
+  console.log('hhh', req.body.price)
   try {
-    console.log(req.body);
     const upBoba = {
-      purchase_date: req.body.purchase_date,
-      drinkname: req.body.drinkname,
+      purchase_date: req.body.date,
+      drinkname: req.body.drink,
       price: req.body.price,
       sweetness: req.body.sweetness,
-      email: req.body.email,
+      id: req.params.id,
     };
     await updateBoba(upBoba);
     res.status(201).send(upBoba);
@@ -79,8 +96,8 @@ router.update = async (req, res) => {
 //delete a boba
 router.del = async (req, res) => {
   try {
-    console.log("Zzzz");
-
+    console.log(req);
+    console.log(req.params.id);
     const boba = await deleteBoba(req.params.id);
     res.status(200).send();
   } catch (err) {
@@ -99,6 +116,17 @@ selectBoba = async () => {
   const select = "SELECT * FROM boba_entries";
   const { rows } = await pool.query(select);
   return rows;
+};
+
+selectByID = async (id) => {
+  const select =
+    "SELECT * FROM boba_entries WHERE id = $1";
+  const query = {
+    text: select,
+    values: [id],
+  };
+  const { rows } = await pool.query(query);
+  return rows.length == 1 ? rows : undefined;
 };
 
 selectID = async (purchase_date, drinkname, email) => {
@@ -142,7 +170,7 @@ insertBoba = async (boba) => {
 
 updateBoba = async (boba) => {
   const update =
-    "UPDATE boba_entries SET price = $3, sweetness = $4 WHERE purchase_date = $1 AND drinkname = $2 AND email = $5";
+    "UPDATE boba_entries SET purchase_date = $1, drinkname = $2, price = $3, sweetness = $4 WHERE id = $5";
   const query = {
     text: update,
     values: [
@@ -150,7 +178,7 @@ updateBoba = async (boba) => {
       boba.drinkname,
       boba.price,
       boba.sweetness,
-      boba.email,
+      boba.id,
     ],
   };
   await pool.query(query);
