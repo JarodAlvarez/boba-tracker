@@ -25,9 +25,9 @@ const LogIn = () => {
   }
 
   return (
-    <div className="min-h-screen p-2- bg-white">
-      <main className="container mx-auto max-w-md">
-        <div className="text-5xl font-cursive flex ml-16">
+    <div className="h-screen bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url('${'/images/gradient.png'}')` }}>
+      <div className="w-screen bg-white pt-2 pb-2">
+        <div className="justify-center text-5xl font-cursive flex">
           Boba Tracker
           <img
             src="https://i.imgur.com/ZAeNBty.png"
@@ -35,14 +35,16 @@ const LogIn = () => {
             className="rounded max-w-full h-16 align-right ml-2"
           />
         </div>
+      </div>
+      <main className="container mx-auto max-w-md">
         <div className="sm:h-18 h-16">
-          <div className="text-base font-cursive text-center">
+          <div className="text-base font-cursive text-center pt-2">
             An easy way to track your monthly boba tea
           </div>
           <div className="text-base font-cursive text-center">purchases</div>
         </div>
         <form
-          className="outline-black bg-loginreg shadow-md p-12 mx-8"
+          className="outline-black bg-white shadow-md border border-gray-400 p-12 mx-8 mt-6 rounded-lg"
           onSubmit={loginHandler}
         >
           <fieldset>
@@ -66,7 +68,7 @@ const LogIn = () => {
                   name="email"
                   type="text"
                   required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-3
+                  className="shadow appearance-none outline-none border border-gray-400 rounded w-full py-2 px-3 mb-3
                   bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
@@ -86,7 +88,7 @@ const LogIn = () => {
                   name="password"
                   type="password"
                   required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-2
+                  className="shadow appearance-none outline-none border border-gray-400 rounded w-full py-2 px-3 mb-2
                   bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />

@@ -1,3 +1,4 @@
+// https://youtu.be/KGFG-yQD7Dw
 import React from "react";
 import useForm from "./useForm"
 import validate from "./validateInfo"
@@ -5,9 +6,9 @@ import validate from "./validateInfo"
 const Form = ({submitForm}) => {
   const {handleChange, values, handleSubmit, errors} = useForm(submitForm, validate);
   return (
-    <div className="h-screen flex">
-      <div className="w-full max-w-md m-auto bg-green-200 bg-opacity-75 rounded-lg border-0 border-black shadow-default py-10 px-16">
-        <h1 className="text-2xl font-medium text-black mt-4 mb-12 text-center">
+    <div className="h-screen flex bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url('${'/images/boba-cover.jpg'}')` }}>
+      <div className="w-full max-w-md m-auto bg-yellow-200 rounded-lg border-0 border-black shadow-default py-10 px-16">
+        <h1 className="text-2xl font-medium text-black mb-8 text-center">
           New Drink 📝
         </h1>
         <form className="form" onSubmit={handleSubmit}>
@@ -72,7 +73,7 @@ const Form = ({submitForm}) => {
 
           <div className="flex justify-around">
             <button
-              className="bg-blue-500 py-2 px-4 text-sm text-white rounded-md border-2 border-blue-500" 
+              className="bg-teal-400 py-2 px-4 text-sm text-white rounded-md border-2 border-teal-400" 
               type="submit">
               Submit
             </button>
