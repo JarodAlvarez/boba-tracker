@@ -1,0 +1,5 @@
+.bckground-history {
+  background-image: url('../../resources/boba-hero.png');
+  background-size: cover;
+  background-color: rgba(255, 0, 0, 0.5);
+}

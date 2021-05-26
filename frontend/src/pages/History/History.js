@@ -1,6 +1,7 @@
 import { useAuth } from 'contexts/authContext'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import './History.css'
 const axios = require('axios')
 
 const History = () => {
@@ -59,7 +60,7 @@ const History = () => {
     return (
       <form
         key={i}
-        className="outline-black bg-loginreg shadow-md p-8 mb-10 w-56 mr-16 font-medium bg-historybox"
+        className="rounded-lg outline-black bg-loginreg shadow-md py-4 px-8 mb-10 w-56 mr-16 font-medium bg-historybox"
       >
         <div className="flex">
           {year}-{('00' + month).slice(-2)}-{('00' + day).slice(-2)}
@@ -70,11 +71,14 @@ const History = () => {
           Sweetness level: {entry.sweetness}
         </div>
         <div className="flex justify-between mt-2">
-          <Link className="btn bg-gray-200 p-2" to={`edit/${entry.id}`}>
+          <Link
+            className="rounded-lg btn bg-gray-200 p-2 font-semibold"
+            to={`edit/${entry.id}`}
+          >
             Edit
           </Link>
           <button
-            className="bg-purple-300 p-2"
+            className="rounded-lg bg-purple-300 p-2 font-semibold"
             onClick={deleteHandler(entry.id)}
           >
             Delete
@@ -85,11 +89,15 @@ const History = () => {
   })
 
   return (
-    <main className="container mx-auto max-w-full">
-      <div className="text-4xl font-cursive flex ml-16 semi-bold">
+    <main className="container mx-auto max-w-full min-h-screen bckground-history">
+      <div className="pt-10 text-2xl text-white font-cursive flex ml-16 semi-bold">
         Past Purchases
       </div>
-      <div className="flex flex-wrap ml-16 mt-12">{historyRender}</div>
+      {isLoaded ? (
+        <div className="flex flex-wrap ml-16 mt-12">{historyRender}</div>
+      ) : (
+        <div className="">Loading...</div>
+      )}
     </main>
   )
 }
