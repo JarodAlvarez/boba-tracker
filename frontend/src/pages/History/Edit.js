@@ -32,7 +32,9 @@ const Edit_History = (props) => {
 
     useEffect(() => {
         if (boba[0] !== undefined) {
-          setDate(boba[0].purchase_date)
+            var year = boba[0].purchase_date.substring(0, 4)
+            var month = boba[0].purchase_date.substring(0, 4)
+          setDate(boba[0].purchase_date.substring(0, 10))
           console.log("hi", date)
           setDrink(boba[0].drinkname)
           console.log(drink)
@@ -51,9 +53,11 @@ const Edit_History = (props) => {
         switch (name) {
           case 'drink':
             setDrink(value)
+            console.log("123123", drink)
             break
           case 'date':
             setDate(value)
+            console.log("123123", date)
             break
           case 'price':
             setPrice(parseFloat(value))

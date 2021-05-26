@@ -54,7 +54,7 @@ const History = () => {
   const historyRender = bobas.map((entry, i) => {
     const date = new Date(entry.purchase_date)
     const day = date.getDate()
-    const month = date.getMonth()
+    const month = date.getMonth() + 1
     const year = date.getFullYear()
     return (
       <form
