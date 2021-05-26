@@ -44,7 +44,7 @@ const LogIn = () => {
           <div className="text-base font-cursive text-center">purchases</div>
         </div>
         <form
-          className="outline-black bg-white shadow-md p-12 mx-8 mt-6 rounded-lg"
+          className="outline-black bg-white shadow-md border border-gray-400 p-12 mx-8 mt-6 rounded-lg"
           onSubmit={loginHandler}
         >
           <fieldset>
@@ -68,7 +68,7 @@ const LogIn = () => {
                   name="email"
                   type="text"
                   required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-3
+                  className="shadow appearance-none outline-none border border-gray-400 rounded w-full py-2 px-3 mb-3
                   bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
@@ -88,7 +88,7 @@ const LogIn = () => {
                   name="password"
                   type="password"
                   required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-2
+                  className="shadow appearance-none outline-none border border-gray-400 rounded w-full py-2 px-3 mb-2
                   bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />

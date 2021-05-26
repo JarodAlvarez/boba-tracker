@@ -1,7 +1,7 @@
+// https://youtu.be/KGFG-yQD7Dw
 import React from "react";
 import useForm from "./useForm"
 import validate from "./validateInfo"
-// import bobaImg from "./../../images/boba-cover.jpeg"
 
 const Form = ({submitForm}) => {
   const {handleChange, values, handleSubmit, errors} = useForm(submitForm, validate);

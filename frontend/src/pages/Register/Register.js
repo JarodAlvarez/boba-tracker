@@ -45,9 +45,9 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen p-2- bg-white">
-      <main className="container mx-auto max-w-md">
-        <div className="text-5xl font-cursive flex ml-16">
+    <div className="min-h-screen bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url('${'/images/gradient.png'}')` }}>
+      <div className="w-screen bg-white pt-2 pb-2">
+        <div className="justify-center text-5xl font-cursive flex">
           Boba Tracker
           <img
             src="https://i.imgur.com/ZAeNBty.png"
@@ -55,6 +55,8 @@ const Register = () => {
             className="rounded max-w-full h-16 align-right ml-2"
           />
         </div>
+      </div>
+      <main className="container mx-auto max-w-md">
         <div className="sm:h-18 h-16">
           <div className="text-base font-cursive text-center">
             An easy way to track your monthly boba tea
@@ -62,7 +64,7 @@ const Register = () => {
           <div className="text-base font-cursive text-center">purchases</div>
         </div>
         <form
-          className="outline-black bg-loginreg shadow-md p-12 mx-8"
+          className="outline-black bg-white border border-gray-400 shadow-md p-12 mx-8 rounded-lg"
           onSubmit={signUpHandler}
         >
           <fieldset>
@@ -80,13 +82,13 @@ const Register = () => {
               <label className="text-black text-lg" htmlFor="name">
                 Name
               </label>
-              <div className="mb-4 w-full mt-2">
+              <div className="mb-2 w-full mt-2">
                 <input
                   id="name"
                   name="name"
                   type="text"
                   required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-3
+                  className="shadow appearance-none outline-none border border-gray-400 rounded w-full py-2 px-3 mb-2
                   bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
@@ -96,13 +98,13 @@ const Register = () => {
               <label className="text-black text-lg" htmlFor="email">
                 Email
               </label>
-              <div className="mb-4 w-full mt-2">
+              <div className="mb-2 w-full mt-2">
                 <input
                   id="email"
                   name="email"
                   type="text"
                   required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-3
+                  className="shadow appearance-none outline-none border border-gray-400 rounded w-full py-2 px-3 mb-2
                   bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
@@ -122,7 +124,7 @@ const Register = () => {
                   name="password"
                   type="password"
                   required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-2
+                  className="shadow appearance-none outline-none border border-gray-400 rounded w-full py-2 px-3 mb-2
                   bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
@@ -142,7 +144,7 @@ const Register = () => {
                   name="confirmation"
                   type="password"
                   required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-2
+                  className="shadow appearance-none outline-none border border-gray-400 rounded w-full py-2 px-3 mb-2
                   bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
@@ -150,7 +152,7 @@ const Register = () => {
             </div>
             <button
               className="w-48 bg-logregbutton text-black font-bold py-2 px-4 rounded 
-              focus:outline-none focus:shadow-outline hover:bg-red-500 ml-12 mt-8"
+              focus:outline-none focus:shadow-outline hover:bg-red-500 ml-12"
               type="submit"
             >
               Register
