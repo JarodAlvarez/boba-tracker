@@ -67,30 +67,30 @@ const Dashboard = () => {
                 <div
                     class="bg-purple-200"
                 >
-                    <h1 class="text-left text-5xl pl-10">Welcome {authContext.authContext.user.name}!</h1>
-                    <div class="flex justify-evenly m-10 text-center text-white">
+                    <h1 class="text-center sm:text-left text-3xl sm:text-5xl sm:pl-10">Welcome {authContext.authContext.user.name}!</h1>
+                    <div class="flex justify-evenly m-2 gap-2 sm:m-10 text-center text-white">
                         <div
-                            class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
+                            class="border-0 bg-purple-500 rounded-full shadow-md p-2 sm:p-6 sm:m-4 w-1/3 sm:w-1/4"
                         >
                             <div class="text-lg">Drinks Bought This Week</div>
                             <div class="text-2xl font-bold">{drinksBoughtThisWeek}</div>
 
                         </div>
                         <div
-                            class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
+                            class="border-0 bg-purple-500 rounded-full shadow-md p-2 sm:p-6 sm:m-4 w-1/3 sm:w-1/4"
                         >
                             <div class="text-lg">Money Spent</div>
                             <div class="text-2xl font-bold">${price}</div>
                         </div>
                         <div
-                            class="border-0 bg-purple-500 rounded-full shadow-md p-6 m-4 w-1/4"
+                            class="border-0 bg-purple-500 rounded-full shadow-md p-2 sm:p-6 sm:m-4 w-1/3 sm:w-1/4"
                         >
                             <div class="text-lg">Average Sweetness</div>
                             <div class="text-2xl font-bold">{(sugar * 100).toFixed(2)}%</div>
                         </div>
 
                     </div>
-                    <div class="text-center grid xl:grid-cols-2 sm:grid-cols-1 gap-4 px-12">
+                    <div class="text-center grid xl:grid-cols-2 sm:grid-cols-1 gap-4 p-2 sm:px-12">
                         <div class="border-1 bg-white rounded-lg p-4 h-1/5 shadow-md">
                             <SpendingChart />
                         </div>
