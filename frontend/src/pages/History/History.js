@@ -1,6 +1,6 @@
 import { useAuth } from 'contexts/authContext'
 import React, { useState, useEffect } from 'react'
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom'
 const axios = require('axios')
 
 const History = () => {
@@ -51,19 +51,6 @@ const History = () => {
     }
   }
 
-  const editHandler = (id) => async (e) => {
-    return <input
-                  id="email"
-                  name="email"
-                  type="text"
-                  required
-                  className="shadow appearance-none outline-none rounded w-full py-2 px-3 mb-3
-                  bg-white text-gray-900 leading-tight focus:shadow-outline"
-                />
-  }
-
-  // calc total of $$ spent
-
   const historyRender = bobas.map((entry, i) => {
     const date = new Date(entry.purchase_date)
     const day = date.getDate()
@@ -72,7 +59,7 @@ const History = () => {
     return (
       <form
         key={i}
-        className="outline-black bg-loginreg shadow-md p-8 mb-2 w-56 mr-16 font-medium bg-historybox"
+        className="outline-black bg-loginreg shadow-md p-8 mb-10 w-56 mr-16 font-medium bg-historybox"
       >
         <div className="flex">
           {year}-{('00' + month).slice(-2)}-{('00' + day).slice(-2)}
@@ -97,22 +84,12 @@ const History = () => {
     )
   })
 
-  /*handleRemoval(event){
-    fetch('https://jsonplaceholder.typicode.com/todos/1', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify("Asd")
-    })
-  }*/
-
   return (
     <main className="container mx-auto max-w-full">
       <div className="text-4xl font-cursive flex ml-16 semi-bold">
         Past Purchases
       </div>
-      <div className="flex ml-16 mt-12">{historyRender}</div>
+      <div className="flex flex-wrap ml-16 mt-12">{historyRender}</div>
     </main>
   )
 }
