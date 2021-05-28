@@ -39,7 +39,7 @@ const LogIn = () => {
       <main className="container mx-auto max-w-md">
         <div className="sm:h-18 h-16">
           <div className="text-base font-cursive text-center pt-2">
-            An easy way to track your monthly boba tea
+            An easy way to track your weekly boba tea
           </div>
           <div className="text-base font-cursive text-center">purchases</div>
         </div>
@@ -92,11 +92,6 @@ const LogIn = () => {
                   bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
-                <p className="text-gray-500 text-sm text-right">
-                  <a href="#" className="text-blue-400 font-bold">
-                    Forgot your password?
-                  </a>
-                </p>
               </div>
             </div>
             <button

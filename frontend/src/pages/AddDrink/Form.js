@@ -8,7 +8,7 @@ const Form = ({submitForm}) => {
   return (
     <div className="h-screen flex bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url('${'/images/boba-cover.jpg'}')` }}>
       <div className="w-full max-w-md m-auto bg-yellow-200 rounded-lg border-0 border-black shadow-default py-10 px-16">
-        <h1 className="text-2xl font-medium text-black mb-8 text-center">
+        <h1 className="text-2xl font-medium text-black mt-4 mb-12 text-center">
           New Drink 📝
         </h1>
         <form className="form" onSubmit={handleSubmit}>

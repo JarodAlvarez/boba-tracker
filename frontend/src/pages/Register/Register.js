@@ -59,7 +59,7 @@ const Register = () => {
       <main className="container mx-auto max-w-md">
         <div className="sm:h-18 h-16">
           <div className="text-base font-cursive text-center">
-            An easy way to track your monthly boba tea
+            An easy way to track your weekly boba tea
           </div>
           <div className="text-base font-cursive text-center">purchases</div>
         </div>
