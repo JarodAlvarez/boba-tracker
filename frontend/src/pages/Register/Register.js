@@ -152,7 +152,7 @@ const Register = () => {
             </div>
             <button
               className="w-48 bg-logregbutton text-black font-bold py-2 px-4 rounded 
-              focus:outline-none focus:shadow-outline hover:bg-red-500 ml-12"
+              focus:outline-none focus:shadow-outline hover:bg-red-500 sm:ml-12"
               type="submit"
             >
               Register
