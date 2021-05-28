@@ -21,10 +21,10 @@ const SugarChart = () => {
                 (result) => {
                     for (var i in result) {
                         var date = new Date(result[i].purchase_date);
-                        // calculate the current week only 
+                        /* Current Week Calculation adapted from spendingChart code */
                         const today = new Date();
-                        const todayDate = today.getDate(); // 1-31
-                        const todayDay = today.getDay(); // 0-6
+                        const todayDate = today.getDate();
+                        const todayDay = today.getDay();
                         const firstDayOfWeek = new Date(today.setDate(todayDate - todayDay));
                         const lastDayOfWeek = new Date(firstDayOfWeek);
                         lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
