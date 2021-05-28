@@ -23,7 +23,8 @@ const Dashboard = () => {
                 // exceptions from actual bugs in components.
                 (error) => {
                     setIsLoaded(true);
-                    setError(error);
+                    setBobas({});
+                    console.log("Hello There");
                 }
             )
     }, []) // empty array so this will only run once

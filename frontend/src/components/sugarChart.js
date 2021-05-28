@@ -20,17 +20,28 @@ const SugarChart = () => {
             .then(
                 (result) => {
                     for (var i in result) {
+                        var date = new Date(result[i].purchase_date);
+                        // calculate the current week only 
+                        const today = new Date();
+                        const todayDate = today.getDate(); // 1-31
+                        const todayDay = today.getDay(); // 0-6
+                        const firstDayOfWeek = new Date(today.setDate(todayDate - todayDay));
+                        const lastDayOfWeek = new Date(firstDayOfWeek);
+                        lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+                        firstDayOfWeek.setHours(0, 0, 0, 0);
                         console.log(result[i]);
-                        if(result[i].sweetness == 0) {
-                            sug_spendings[0]++;
-                        } else if (result[i].sweetness == 0.25) {
-                            sug_spendings[1]++;
-                        } else if (result[i].sweetness == 0.50) {
-                            sug_spendings[2]++;
-                        } else if (result[i].sweetness == 0.75) {
-                            sug_spendings[3]++;
-                        } else if (result[i].sweetness = 1) {
-                            sug_spendings[4]++;
+                        if (date >= firstDayOfWeek && date <= lastDayOfWeek) {
+                            if (result[i].sweetness == 0) {
+                                sug_spendings[0]++;
+                            } else if (result[i].sweetness == 0.25) {
+                                sug_spendings[1]++;
+                            } else if (result[i].sweetness == 0.50) {
+                                sug_spendings[2]++;
+                            } else if (result[i].sweetness == 0.75) {
+                                sug_spendings[3]++;
+                            } else if (result[i].sweetness = 1) {
+                                sug_spendings[4]++;
+                            }
                         }
                     }        
                     newChartInstance.update();
@@ -50,7 +61,7 @@ const SugarChart = () => {
             data: {
                 labels: ['0%','25%','50%','75%','100%'],
                 datasets: [{
-                    label: 'Total Sugar Level Counts',
+                    label: 'Total Sugar Level Counts for this Week',
                     data: sug_spendings,
                     backgroundColor: [
                         'rgba(236, 220, 194, 0.7)'

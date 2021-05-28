@@ -53,7 +53,7 @@ const LogIn = () => {
                 {error}
               </div>
             )}
-            <div className="flex flex-col sm:flex-row items-baseline justify-center mb-4 w-full h-12">
+            <div className="flex flex-col sm:flex-row items-baseline justify-center sm:mb-4 w-full h-12">
               <label className="text-black text-2xl font-bold">
                 Welcome back!
               </label>
@@ -96,7 +96,7 @@ const LogIn = () => {
             </div>
             <button
               className="w-48 bg-logregbutton text-black font-bold py-2 px-4 rounded 
-              focus:outline-none focus:shadow-outline hover:bg-red-500 ml-12 mt-4"
+              focus:outline-none focus:shadow-outline hover:bg-red-500 sm:ml-12 mt-4"
               type="submit"
             >
               Sign in
