@@ -8,7 +8,7 @@ const SpendingChart = () => {
     const chartContainer = useRef(null);
     const [error, setError] = React.useState(null);
     const authContext = useAuth();
-    const call = "http://localhost:3010/v0/boba/" + authContext.authContext.user.email;
+    const call = "http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/v0/boba/" + authContext.authContext.user.email;
     var date_spendings = [0, 0, 0, 0, 0, 0, 0];
     let newChartInstance = '';
     var chartStyle = {
@@ -21,6 +21,7 @@ const SpendingChart = () => {
                 (result) => {
                     for (var i in result) {
                         var date = new Date(result[i].purchase_date);
+                        date = new Date(date.getTime() + date.getTimezoneOffset() * 60000) //local Date
                         // calculate the current week only 
                         const today = new Date();
                         const todayDate = today.getDate(); // 1-31

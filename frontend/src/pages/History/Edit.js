@@ -22,7 +22,7 @@ const Edit_History = (props) => {
   
     useEffect(() => {
       const id = props.match.params.id
-      axios.get(`http://localhost:3010/v0/boba/${id}/${id}`).then(({ data }) => {
+      axios.get(`http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/v0/boba/${id}/${id}`).then(({ data }) => {
       setBoba(data)
       console.log(boba)
     })
@@ -74,7 +74,7 @@ const Edit_History = (props) => {
         try {
         axios
         .put(
-            `http://localhost:3010/v0/boba/${id}`,
+            `http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/v0/boba/${id}`,
             {
                 user: authContext.user,
               //id: drink.id,

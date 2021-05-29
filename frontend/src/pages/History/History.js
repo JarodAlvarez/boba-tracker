@@ -12,7 +12,7 @@ const History = () => {
   const [bobas, setBobas] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:3010/v0/boba/${authContext.user.email}`)
+    fetch(`http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/v0/boba/${authContext.user.email}`)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -34,7 +34,7 @@ const History = () => {
       e.preventDefault()
       console.log(id)
       await axios
-        .delete(`http://localhost:3010/v0/boba/${id}`, {
+        .delete(`http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/v0/boba/${id}`, {
           headers: {
             Authorization: 'Bearer ' + authContext.user.token,
           },
@@ -53,7 +53,9 @@ const History = () => {
   }
 
   const historyRender = bobas.map((entry, i) => {
-    const date = new Date(entry.purchase_date)
+    var date = new Date(entry.purchase_date)
+    date = new Date(date.getTime() + date.getTimezoneOffset() * 60000) //local Date
+    console.log(entry.purchase_date);
     const day = date.getDate()
     const month = date.getMonth() + 1
     const year = date.getFullYear()
@@ -94,7 +96,7 @@ const History = () => {
         Past Purchases
       </div>
       {isLoaded ? (
-        <div className="flex flex-wrap ml-16 mt-12">{historyRender}</div>
+        <div className="flex flex-wrap ml-12 sm:ml-16 mt-12">{historyRender}</div>
       ) : (
         <div className="">Loading...</div>
       )}

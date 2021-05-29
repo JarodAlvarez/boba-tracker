@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
     let user = Cookies.getJSON('userInfo')
     if (user !== undefined) {
       axios
-        .get('http://localhost:3010/users/verifyLogin', {
+        .get('http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/users/verifyLogin', {
           headers: {
             Authorization: 'Bearer ' + user.token,
           },
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }) => {
   const logIn = async (username, password) => {
     dispatch({ type: LOGIN_REQUEST, payload: { username, password } })
     try {
-      const { data } = await axios.post('http://localhost:3010/users/signIn', {
+      const { data } = await axios.post('http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/users/signIn', {
         email: username,
         password,
       })
@@ -109,7 +109,7 @@ export const AuthProvider = ({ children }) => {
   const signUp = async (name, email, password) => {
     dispatch({ type: REGISTER_REQUEST, payload: { name, email, password } })
     try {
-      const { data } = await axios.post('http://localhost:3010/users/', {
+      const { data } = await axios.post('http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/users/', {
         email,
         password,
         name,

@@ -31,7 +31,7 @@ const useForm = (callback, validate) => {
       sweetness: values.sweetness,
       email: authContext.authContext.user.email,
     };
-    fetch('http://localhost:3010/v0/boba', {
+    fetch('http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/v0/boba', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -12,13 +12,13 @@ const Navbar = () => {
       <div class="container mx-auto bg-white pt-2">
           <nav class="flex justify-between">
             {/* Logo aligned on left */}
-            <div class=" display: inline-block text-xl font-bold">
+            <div class=" display: inline-block text-sm sm:text-xl font-bold">
               <a href="/home">
               Boba Tracker</a>
               <img
               src="https://i.imgur.com/ZAeNBty.png"
               alt="..."
-              class="display: inline-block h-8 ml-2 mb-2"
+              class="display: inline-block h-4 ml-1 sm:h-8 sm:ml-2 sm:mb-2"
               />
             </div>
             {/* Links aligned on right */}

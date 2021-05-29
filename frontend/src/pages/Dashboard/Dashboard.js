@@ -9,7 +9,7 @@ const Dashboard = () => {
     const [isLoaded, setIsLoaded] = React.useState(false);
     const [bobas, setBobas] = React.useState([]);
     const authContext = useAuth();
-    const call = "http://localhost:3010/v0/boba/" + authContext.authContext.user.email;
+    const call = "http://ec2-18-191-254-252.us-east-2.compute.amazonaws.com:3010/v0/boba/" + authContext.authContext.user.email;
     React.useEffect(() => {
         fetch(call)
             .then(res => res.json())
