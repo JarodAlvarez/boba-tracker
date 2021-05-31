@@ -19,7 +19,7 @@ const Form = ({submitForm}) => {
               type="text"
               className={`w-full p-2 text-black border-2 rounded-md text-sm mb-4`}
               id="date"
-              placeholder="mm/dd/yyyy"
+              placeholder="mm-dd-yyyy"
               value={values.date || ""}
               onChange={handleChange}
             />

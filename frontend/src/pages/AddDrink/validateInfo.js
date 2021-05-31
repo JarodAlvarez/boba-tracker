@@ -19,5 +19,17 @@ export default function validateInfo(values) {
         errors.sweetness = "Sweetness level required"
     }
 
+    const pattern = /^([0-9]{2}-[0-9]{2}-[0-9]{4}$)/
+    const validDate = pattern.test(values.date)
+    if (!validDate){
+        errors.date = "Date must be in mm-dd-yy format!"
+    }
+
+    const value = parseFloat(values.sweetness)
+    if((value != 0 && value != 0.25 && value != 0.5 && value != 0.75 && value != 1.00)){
+        console.log(parseFloat(values.sweetness))
+        errors.sweetness = "Sweetness must have value of 0, 0.25, 0.50, 0.75, or 1.0"
+    }
+
     return errors;
 }
