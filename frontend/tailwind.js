@@ -11,6 +11,11 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
     },
+  extend: {
+    backgroundImage:{
+      'edit-bg': "url('https://raw.githubusercontent.com/JarodAlvarez/boba-tracker/main/frontend/src/resources/boba-hero.png')",
+     },
+  },
 
     colors: {
       transparent: 'transparent',
@@ -366,6 +371,8 @@ module.exports = {
       '25': '0.25',
       '50': '0.5',
       '75': '0.75',
+      '80': '0.80',
+      '90': '0.90',
       '100': '1',
     },
     order: {

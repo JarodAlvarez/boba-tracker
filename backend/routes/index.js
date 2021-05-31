@@ -76,6 +76,8 @@ router.post = async (req, res) => {
 
 //update a boba
 router.update = async (req, res) => {
+  const value = parseFloat(req.body.sweetness)
+  if((value == 0 || value == 0.25 || value == 0.5 || value == 0.75 || value == 1.00)){
   console.log('hhh', req.body.price)
   try {
     const upBoba = {
@@ -91,6 +93,7 @@ router.update = async (req, res) => {
     console.error(err.message);
     res.status(404).send();
   }
+}
 };
 
 //delete a boba
