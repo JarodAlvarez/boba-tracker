@@ -15,10 +15,12 @@ const Edit_History = (props) => {
   const [sweetness, setSweetness] = useState('')
   const [error, setError] = useState('123')
 
-  const [dateString, setDateString] = useState('')
+  const [dateCopy, setDateCopy] = useState('')
   const [day, setDay] = useState('')
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
+
+  const formattedDate = month + '-' + day + '-' + year
 
   useEffect(() => {
     const id = props.match.params.id
@@ -30,6 +32,7 @@ const Edit_History = (props) => {
   useEffect(() => {
     if (boba[0] !== undefined) {
       setDate(boba[0].purchase_date.substring(0, 10))
+      setDateCopy(boba[0].purchase_date.substring(0, 10))
       setYear(boba[0].purchase_date.substring(0, 4))
       setMonth(boba[0].purchase_date.substring(5, 7) + '-')
       setDay(boba[0].purchase_date.substring(8, 10) + '-')
@@ -39,14 +42,6 @@ const Edit_History = (props) => {
     }
     console.log(month)
   }, [boba])
-
-  useEffect(() => {
-    if (dateString == '') {
-      console.log(month)
-      setDateString(day + '-' + month)
-    }
-    console.log(month)
-  }, [day])
 
   const onChangeHandler = (e) => {
     const t = qs.parse(props.location.search, { ignoreQueryPrefix: true })
@@ -68,7 +63,7 @@ const Edit_History = (props) => {
   }
 
   const submitHandler = async (e) => {
-    var dateFormatted = month + day + year
+    var dateFormatted = month + year
     e.preventDefault()
     setError(validate(drink, date, dateFormatted, price, sweetness))
     const id = props.match.params.id
@@ -121,10 +116,13 @@ const Edit_History = (props) => {
       inputStatus.current = 'badData'
     }
     console.log(date.substring(0, 2))
+    console.log(date)
+    console.log(dateCopy)
     if (
-      (date.substring(0, 2) > 12 || date.substring(0, 2)) < 1 &&
-      date != dateFormatted
+      (date.substring(0, 2) > 12 || date.substring(0, 2) < 1) &&
+      date != dateCopy
     ) {
+      console.log('yes')
       errors.date = 'Month must be between 01 and 12'
       inputStatus.current = 'badData'
     }

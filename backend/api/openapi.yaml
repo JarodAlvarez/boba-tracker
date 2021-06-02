@@ -1,4 +1,4 @@
-openapi: '3.0.3'
+openapi: "3.0.3"
 
 info:
   title: Boba Tracker Entries
@@ -17,13 +17,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BobaResponse'
+                $ref: "#/components/schemas/BobaResponse"
         default:
           description: Unexpected Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
     post:
       description: Creates a new boba
@@ -33,14 +33,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Boba'
+              $ref: "#/components/schemas/Boba"
       responses:
         201:
           description: Application response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Boba'
+                $ref: "#/components/schemas/Boba"
         400:
           description: Invalid ID
         409:
@@ -50,7 +50,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     put:
       description: Updates an existing boba entry
       requestBody:
@@ -59,14 +59,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Boba'
+              $ref: "#/components/schemas/Boba"
       responses:
         201:
           description: Application response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Boba'
+                $ref: "#/components/schemas/Boba"
         400:
           description: Invalid ID
         404:
@@ -76,25 +76,25 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'    
+                $ref: "#/components/schemas/Error"
 
   /v0/boba/{email}:
     get:
       description: Returns all drinks for one user
       parameters:
-      - name: email
-        in: path
-        description: User's ID
-        required: true
-        schema:
-          type: string
+        - name: email
+          in: path
+          description: User's ID
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: Boba found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Boba'
+                $ref: "#/components/schemas/Boba"
         400:
           description: Invalid ID
         404:
@@ -104,37 +104,37 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /v0/boba/{purchase_date}/{drinkname}/{email}:
     get:
       description: Returns a single boba
       parameters:
-      - name: purchase_date
-        in: path
-        description: Date of Purchase must be in YYYY-MM-DD format
-        required: true
-        schema:
-          type: string
-      - name: drinkname
-        in: path
-        description: Name of the drink
-        required: true
-        schema:
-          type: string
-      - name: email
-        in: path
-        description: User's ID
-        required: true
-        schema:
-          type: string
+        - name: purchase_date
+          in: path
+          description: Date of Purchase must be in YYYY-MM-DD format
+          required: true
+          schema:
+            type: string
+        - name: drinkname
+          in: path
+          description: Name of the drink
+          required: true
+          schema:
+            type: string
+        - name: email
+          in: path
+          description: User's ID
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: Boba found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Boba'
+                $ref: "#/components/schemas/Boba"
         400:
           description: Invalid ID
         404:
@@ -144,35 +144,35 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
     delete:
       description: Deletes a single boba
       parameters:
-      - name: purchase_date
-        in: path
-        description: Date of Purchase must be in YYYY-MM-DD format
-        required: true
-        schema:
-          type: string
-      - name: drinkname
-        in: path
-        description: Name of the drink
-        required: true
-        schema:
-          type: string
-      - name: email
-        in: path
-        description: User's ID
-        required: true
-        schema:
-          type: string
+        - name: purchase_date
+          in: path
+          description: Date of Purchase must be in YYYY-MM-DD format
+          required: true
+          schema:
+            type: string
+        - name: drinkname
+          in: path
+          description: Name of the drink
+          required: true
+          schema:
+            type: string
+        - name: email
+          in: path
+          description: User's ID
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: Successfully deleted
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Boba'
+                $ref: "#/components/schemas/Boba"
         400:
           description: Invalid ID
         404:
@@ -182,8 +182,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-                
+                $ref: "#/components/schemas/Error"
+
 components:
   schemas:
     Error:
@@ -200,7 +200,7 @@ components:
     BobaResponse:
       type: array
       items:
-        $ref: '#/components/schemas/Boba'
+        $ref: "#/components/schemas/Boba"
 
     Boba:
       type: object
@@ -220,9 +220,7 @@ components:
           type: string
       required:
         - purchase_date
-        - drinkname 
+        - drinkname
         - price
-        - sweetness 
+        - sweetness
         - email
-
-
