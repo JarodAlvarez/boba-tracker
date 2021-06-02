@@ -17,41 +17,43 @@ const useForm = (callback, validate) => {
       ...values,
       [name]: value,
     })
-
   }
 
   const handleSubmit = (e) => {
     console.log(values.date)
     e.preventDefault()
-    setErrors(validate(values))
-    setIsSubmitting(true)
-
-    const data = {
-      purchase_date: values.date,
-      drinkname: values.drink,
-      price: values.price,
-      sweetness: values.sweetness,
-      email: authContext.authContext.user.email,
-    };
-    fetch('http://localhost:3010/v0/boba', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .catch((error) => console.error('Error:', error))
-      .then((response) => console.log('Success:', response))
-      setErrors(validate(values))
+    var errValidate = validate(values)
+    setErrors(errValidate)
+    if (Object.keys(errValidate).length === 0) {
       setIsSubmitting(true)
+
+      const data = {
+        purchase_date: values.date,
+        drinkname: values.drink,
+        price: values.price,
+        sweetness: values.sweetness,
+        email: authContext.authContext.user.email,
+      }
+      fetch('http://localhost:3010/v0/boba', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .catch((error) => console.error('Error:', error))
+        .then((response) => console.log('Success:', response))
+      setErrors(errValidate)
+      setIsSubmitting(true)
+    }
   }
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       callback()
     }
-  }, [errors]);
+  }, [errors])
 
   return { handleChange, values, handleSubmit, errors }
 }
