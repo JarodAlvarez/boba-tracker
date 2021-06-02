@@ -1,92 +1,88 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { useAuth } from 'contexts/authContext'
 import { Link } from 'react-router-dom'
 import * as qs from 'qs'
 const axios = require('axios')
 
-
 const Edit_History = (props) => {
+  const { authContext } = useAuth()
+  const inputStatus = useRef('')
+  const [boba, setBoba] = useState('')
+  const [drink, setDrink] = useState('')
+  const [date, setDate] = useState('')
+  const [price, setPrice] = useState('')
+  const [sweetness, setSweetness] = useState('')
+  const [error, setError] = useState('123')
 
-    const { authContext } = useAuth()
-  
-    const thing = useRef('')
-    const [boba, setBoba] = useState('')
-    const [drink, setDrink] = useState('')
-    const [date, setDate] = useState('')
-    const [price, setPrice] = useState('')
-    const [sweetness, setSweetness] = useState('')
-    const [error, setError] = useState('123')
-    const [canSubmit, setSubmitting] = useState(false)
+  const [dateString, setDateString] = useState('')
+  const [day, setDay] = useState('')
+  const [month, setMonth] = useState('')
+  const [year, setYear] = useState('')
 
-
-    //const t = qs.parse(props.location.search, {ignoreQueryPrefix: true})
-  
-    useEffect(() => {
-      const id = props.match.params.id
-      axios.get(`http://localhost:3010/v0/boba/${id}/${id}`).then(({ data }) => {
+  useEffect(() => {
+    const id = props.match.params.id
+    axios.get(`http://localhost:3010/v0/boba/${id}/${id}`).then(({ data }) => {
       setBoba(data)
-      console.log(boba)
     })
   }, [])
 
+  useEffect(() => {
+    if (boba[0] !== undefined) {
+      setDate(boba[0].purchase_date.substring(0, 10))
+      setYear(boba[0].purchase_date.substring(0, 4))
+      setMonth(boba[0].purchase_date.substring(5, 7) + '-')
+      setDay(boba[0].purchase_date.substring(8, 10) + '-')
+      setDrink(boba[0].drinkname)
+      setPrice(boba[0].price)
+      setSweetness(boba[0].sweetness)
+    }
+    console.log(month)
+  }, [boba])
 
+  useEffect(() => {
+    if (dateString == '') {
+      console.log(month)
+      setDateString(day + '-' + month)
+    }
+    console.log(month)
+  }, [day])
 
-    useEffect(() => {
-        if (boba[0] !== undefined) {
-            var year = boba[0].purchase_date.substring(0, 4)
-            var month = boba[0].purchase_date.substring(0, 4)
-          setDate(boba[0].purchase_date.substring(0, 10))
-          console.log("hi", date)
-          setDrink(boba[0].drinkname)
-          console.log(drink)
-          setPrice(boba[0].price)
-          console.log(price)
-          setSweetness(boba[0].sweetness)
-        }
-      }, [boba])
-      
+  const onChangeHandler = (e) => {
+    const t = qs.parse(props.location.search, { ignoreQueryPrefix: true })
+    const { name, value } = e.currentTarget
+    switch (name) {
+      case 'drink':
+        setDrink(value)
+        break
+      case 'date':
+        setDate(value)
+        break
+      case 'price':
+        setPrice(parseFloat(value))
+        break
+      case 'sweetness':
+        setSweetness(value)
+        break
+    }
+  }
 
-
-    const onChangeHandler = (e) => {
-      const t = qs.parse(props.location.search, {ignoreQueryPrefix: true})
-        console.log(props.location.search)
-        const { name, value } = e.currentTarget
-        switch (name) {
-          case 'drink':
-            setDrink(value)
-            break
-          case 'date':
-            setDate(value)
-            console.log("123123", date)
-            break
-          case 'price':
-            setPrice(parseFloat(value))
-            break
-          case 'sweetness':
-            setSweetness(value)
-            break
-        }
-      }
-
-      const submitHandler = async (e) => {
-        e.preventDefault()
-        console.log(date)
-        setError(validate(drink, date, price, sweetness))
-        console.log(error)
-        const id = props.match.params.id
-        try {
-        axios
+  const submitHandler = async (e) => {
+    var dateFormatted = month + day + year
+    e.preventDefault()
+    setError(validate(drink, date, dateFormatted, price, sweetness))
+    const id = props.match.params.id
+    try {
+      axios
         .put(
-            `http://localhost:3010/v0/boba/${id}`,
-            {
-                user: authContext.user,
-              //id: drink.id,
-              date,
-              drink,
-              price,
-              sweetness,
-            },
+          `http://localhost:3010/v0/boba/${id}`,
+          {
+            user: authContext.user,
+            date,
+            drink,
+            price,
+            sweetness,
+          },
           {
             headers: {
               Authorization: 'Bearer ' + authContext.user.token,
@@ -94,60 +90,66 @@ const Edit_History = (props) => {
           }
         )
         .then(({ data }) => console.log(data))
-      } catch (err) {
-      console.log(err.response)
+    } catch (err) {
       setError(err.response)
-      }
-      console.log(thing)
-      if(thing.current != 'badData')
-      {
+    }
+    if (inputStatus.current != 'badData') {
       alert('Successfully modified!')
-      }
-      thing.current = ''
+    }
+    inputStatus.current = ''
+  }
+
+  function validate(drinkName, date, dateFormatted, price, sweetness) {
+    let errors = {}
+    if (date === '') {
+      errors.date = 'Date required'
+      inputStatus.current = 'badData'
     }
 
-    function validate(dr, da, pr, sw){
-      console.log(da)
-      let errors = {}
-      if(!da){
-        errors.date = "Date required"
-        console.log("no date")
-        thing.current = 'badData'
-      }
-  
-      if(!dr){
-        errors.drink = "Drink name required"
-        console.log("no date")
-        thing.current = 'badData'
-      }
-  
-      if(!pr){
-        errors.price = "Price required"
-        thing.current = 'badData'
-      }
-  
-      if(!sw){
-        errors.sweetness = "Sweetness level required"
-        thing.current = 'badData'
-      }
-      const pattern = /^([0-9]{4}-[0-9]{2}-[0-9]{2}$)/
-      const validDate = pattern.test(da)
-      console.log(validDate)
-      console.log(da)
-      if (!validDate){
-        errors.date = "Date must be in yyyy-mm-dd format!"
-        thing.current = 'badData'
-      }
-      const value = parseFloat(sw)
-      if((value != 0 && value != 0.25 && value != 0.5 && value != 0.75 && value != 1.00)){
-          console.log(parseFloat(sw))
-          errors.sweetness = "Sweetness must be 0, 0.25, 0.50, 0.75, or 1.0."
-          thing.current = 'badData'
+    if (drinkName === '') {
+      errors.drink = 'Drink name required'
+      inputStatus.current = 'badData'
     }
 
-      console.log(thing.current)
-      return errors;
+    if (price === '') {
+      errors.price = 'Price required'
+      inputStatus.current = 'badData'
     }
+
+    if (sweetness === '') {
+      errors.sweetness = 'Sweetness level required'
+      inputStatus.current = 'badData'
+    }
+    console.log(date.substring(0, 2))
+    if (
+      date.substring(0, 2) > 12 ||
+      (date.substring(0, 2) < 1 && date != dateFormatted)
+    ) {
+      errors.date = 'Month must be between 01 and 12'
+      inputStatus.current = 'badData'
+    }
+
+    const pattern = /^([0-9]{2}-[0-9]{2}-[0-9]{4}$)/
+    const validDate = pattern.test(date)
+    if (!validDate) {
+      console.log(date)
+      errors.date = 'Date must be in mm-dd-yyyy format!'
+      inputStatus.current = 'badData'
+    }
+    const value = parseFloat(sweetness)
+    if (
+      value != 0 &&
+      value != 0.25 &&
+      value != 0.5 &&
+      value != 0.75 &&
+      value != 1.0
+    ) {
+      errors.sweetness = 'Sweetness must be 0, 0.25, 0.50, 0.75, or 1.0.'
+      inputStatus.current = 'badData'
+    }
+
+    return errors
+  }
 
   return (
     <div className="h-screen flex bg-edit-bg bg-cover bg-opacity-75">
@@ -159,94 +161,93 @@ const Edit_History = (props) => {
           <fieldset>
             <div>
               <label name="date" htmlFor="date">
-                Date Purchased
+                Date Purchased (mm-dd-yyyy)
               </label>
-                <input
-                  name="date"
-                  type="text"
-                  className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
-                  id="date"
-                  required
-                  //placeholder="mm/dd/yyyy"
-                  onChange={onChangeHandler}
-                  defaultValue={date}
-                />
-                {error.date && <p class="text-center text-sm text-red-500">{error.date}</p>}
+              <input
+                name="date"
+                type="text"
+                pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}$"
+                className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
+                id="date"
+                required
+                placeholder="mm-dd-yyyy"
+                onChange={onChangeHandler}
+                defaultValue={month + day + year}
+              />
+              {error.date && (
+                <p class="text-center text-sm text-red-500">{error.date}</p>
+              )}
             </div>
             <div>
-              <label
-                name="drink" htmlFor="drink"
-              >
+              <label name="drink" htmlFor="drink">
                 Name
               </label>
-                <input
-                  name="drink"
-                  type="text"
-                  className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
-                  id="drink"
-                  required
-                  //placeholder="Drink name"
-                  defaultValue={drink}
-                  onChange={onChangeHandler}
-                />
+              <input
+                name="drink"
+                type="text"
+                className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
+                id="drink"
+                required
+                placeholder="Drink name"
+                defaultValue={drink}
+                onChange={onChangeHandler}
+              />
             </div>
             <div>
-              <label
-                name="price" htmlFor="price"
-              >
+              <label name="price" htmlFor="price">
                 Price
               </label>
-                <input
-                  name="price"
-                  type="number"
-                  step="0.01"
-                  required
-                  className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
-                  id="price"
-                  //placeholder="Drink price"
-                  defaultValue={price}
-                  onChange={onChangeHandler}
-                />
+              <input
+                name="price"
+                type="number"
+                step="0.01"
+                required
+                placeholder="Drink price"
+                className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
+                id="price"
+                defaultValue={price}
+                onChange={onChangeHandler}
+              />
             </div>
             <div>
-              <label
-                name="sweetness" htmlFor="sweetness"
-              >
+              <label name="sweetness" htmlFor="sweetness">
                 Sweetness Level
               </label>
               <input
-                  name="sweetness"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  max="1"
-                  required
-                  className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
-                  id="sweetness"
-                  //placeholder="Value between 0 and 1"
-                  defaultValue={sweetness}
-                  onChange={onChangeHandler}
-                />
-                {error.sweetness && <p class="text-center text-sm text-red-500">{error.sweetness}</p>}
+                name="sweetness"
+                type="number"
+                step="0.25"
+                min="0"
+                max="1"
+                required
+                placeholder="Value of 0, 0.25, 0.50, 0.75, or 1"
+                className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
+                id="sweetness"
+                defaultValue={sweetness}
+                onChange={onChangeHandler}
+              />
+              {error.sweetness && (
+                <p class="text-center text-sm text-red-500">
+                  {error.sweetness}
+                </p>
+              )}
             </div>
             <div className="mt-4 flex justify-evenly">
-            <button
-              className="bg-blue-500 py-2 px-4 text-sm text-white rounded-md border-2 border-blue-500"
-              type="submit"
-            >
-              Save
-            </button>
-            <Link className="btn bg-gray-300 p-2 rounded-lg" to={'/history'}>
-            Cancel
-          </Link>
+              <button
+                className="bg-blue-500 py-2 px-4 text-sm text-white rounded-md border-2 border-blue-500"
+                type="submit"
+              >
+                Save
+              </button>
+              <Link className="btn bg-gray-300 p-2 rounded-lg" to={'/history'}>
+                Cancel
+              </Link>
             </div>
           </fieldset>
         </form>
       </main>
     </div>
   )
-
-
 }
 
 export default Edit_History

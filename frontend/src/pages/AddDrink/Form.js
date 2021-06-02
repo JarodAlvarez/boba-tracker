@@ -59,7 +59,7 @@ const Form = ({submitForm}) => {
             <input
               name="sweetness"
               type="number"
-              step="0.01"
+              step="0.25"
               min="0"
               max="1"
               className={`w-full p-2 text-black border-2 rounded-md text-sm mb-4`}
