@@ -122,20 +122,13 @@ const Edit_History = (props) => {
     }
     console.log(date.substring(0, 2))
     if (
-      date.substring(0, 2) > 12 ||
-      (date.substring(0, 2) < 1 && date != dateFormatted)
+      (date.substring(0, 2) > 12 || date.substring(0, 2)) < 1 &&
+      date != dateFormatted
     ) {
       errors.date = 'Month must be between 01 and 12'
       inputStatus.current = 'badData'
     }
 
-    const pattern = /^([0-9]{2}-[0-9]{2}-[0-9]{4}$)/
-    const validDate = pattern.test(date)
-    if (!validDate) {
-      console.log(date)
-      errors.date = 'Date must be in mm-dd-yyyy format!'
-      inputStatus.current = 'badData'
-    }
     const value = parseFloat(sweetness)
     if (
       value != 0 &&
