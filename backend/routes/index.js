@@ -4,7 +4,6 @@ const app = require("../app");
 var router = express.Router();
 const pool = require("../db");
 
-
 //app.use(express.json()) // => req.body
 
 //ROUTES//
@@ -16,19 +15,14 @@ router.getAll = async (req, res) => {
 };
 //get a boba
 router.getBoba = async (req, res) => {
-  //console.log("odddddddddk");
-  //console.log(req.params.id);
-  const boba = await selectByID(
-    req.params.id
-  );
-  console.log(boba)
+  const boba = await selectByID(req.params.id);
+  console.log(boba);
   if (boba == undefined) {
     res.status(404).send();
   } else {
     res.status(200).json(boba);
   }
 };
-
 
 router.getOne = async (req, res) => {
   console.log(req.params.boba_id, req.params.drinkname, req.params.email);
@@ -76,24 +70,29 @@ router.post = async (req, res) => {
 
 //update a boba
 router.update = async (req, res) => {
-  const value = parseFloat(req.body.sweetness)
-  if((value == 0 || value == 0.25 || value == 0.5 || value == 0.75 || value == 1.00)){
-  console.log('hhh', req.body.price)
-  try {
-    const upBoba = {
-      purchase_date: req.body.date,
-      drinkname: req.body.drink,
-      price: req.body.price,
-      sweetness: req.body.sweetness,
-      id: req.params.id,
-    };
-    await updateBoba(upBoba);
-    res.status(201).send(upBoba);
-  } catch (err) {
-    console.error(err.message);
-    res.status(404).send();
+  const value = parseFloat(req.body.sweetness);
+  if (
+    value == 0 ||
+    value == 0.25 ||
+    value == 0.5 ||
+    value == 0.75 ||
+    value == 1.0
+  ) {
+    try {
+      const upBoba = {
+        purchase_date: req.body.date,
+        drinkname: req.body.drink,
+        price: req.body.price,
+        sweetness: req.body.sweetness,
+        id: req.params.id,
+      };
+      await updateBoba(upBoba);
+      res.status(204).send(upBoba);
+    } catch (err) {
+      console.error(err.message);
+      res.status(404).send();
+    }
   }
-}
 };
 
 //delete a boba
@@ -122,8 +121,7 @@ selectBoba = async () => {
 };
 
 selectByID = async (id) => {
-  const select =
-    "SELECT * FROM boba_entries WHERE id = $1";
+  const select = "SELECT * FROM boba_entries WHERE id = $1";
   const query = {
     text: select,
     values: [id],

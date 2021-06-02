@@ -32,7 +32,6 @@ const History = () => {
   const deleteHandler = (id) => async (e) => {
     try {
       e.preventDefault()
-      console.log(id)
       await axios
         .delete(`http://localhost:3010/v0/boba/${id}`, {
           headers: {
@@ -52,6 +51,22 @@ const History = () => {
     }
   }
 
+  bobas.sort(function (a, b) {
+    if (b.purchase_date.substr(0, 4) == a.purchase_date.substr(0, 4)) {
+      if (b.purchase_date.substr(5, 2) == a.purchase_date.substr(5, 2)) {
+        if (b.purchase_date.substr(8, 2) == a.purchase_date.substr(8, 2)) {
+          if (a.drinkname < b.drinkname) {
+            return -1
+          }
+          return 0
+        }
+        return b.purchase_date.substr(8, 2) - a.purchase_date.substr(8, 2)
+      }
+      return b.purchase_date.substr(5, 2) - a.purchase_date.substr(5, 2)
+    }
+    return b.purchase_date.substr(0, 4) - a.purchase_date.substr(0, 4)
+  })
+
   const historyRender = bobas.map((entry, i) => {
     const date = new Date(entry.purchase_date)
     const day = date.getDate()
@@ -60,17 +75,21 @@ const History = () => {
     return (
       <form
         key={i}
-        className="rounded-lg outline-black bg-loginreg shadow-md py-4 px-8 mb-10 w-56 mr-16 font-medium bg-historybox"
+        className="rounded-lg bg-loginreg shadow-md py-4 px-8 mb-10 w-56 mr-16 font-medium bg-historybox"
       >
         <div className="flex">
-          {year}-{('00' + month).slice(-2)}-{('00' + day).slice(-2)}
+          {('00' + month).slice(-2)}-{('00' + day).slice(-2)}-{year}
         </div>
-        <div className="whitespace-nowrap">{entry.drinkname}</div>
-        <div className="flex whitespace-pre">Price: ${entry.price}</div>
-        <div className="flex whitespace-pre">
+        <div className="whitespace-nowrap truncate overflow-clip">
+          {entry.drinkname}
+        </div>
+        <div className="flex whitespace-pre overflow-clip">
+          Price: ${entry.price}
+        </div>
+        <div className="flex whitespace-pre overflow-clip">
           Sweetness level: {entry.sweetness}
         </div>
-        <div className="flex justify-between mt-2">
+        <div className="flex justify-between mt-2 overflow-clip">
           <Link
             className="rounded-lg btn bg-gray-200 p-2 font-semibold"
             to={`edit/${entry.id}`}
