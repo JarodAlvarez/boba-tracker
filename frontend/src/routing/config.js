@@ -42,13 +42,14 @@ const config = [
     redirect: routePaths.LOGIN,
   },
   {
-    path: routePaths.ERROR,
-    component: Error,
-  },
-  {
     path: routePaths.EDIT_HISTORY,
     authOnly: true,
     component: Edit_History,
+    redirect: routePaths.LOGIN,
+  },
+  {
+    path: routePaths.ERROR,
+    component: Error,
   },
 ]
 
