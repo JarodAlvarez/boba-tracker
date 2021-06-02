@@ -25,10 +25,7 @@ const LogIn = () => {
   }
 
   return (
-    <div
-      className="h-screen bg-no-repeat bg-cover bg-center"
-      style={{ backgroundImage: `url('${'/images/gradient.png'}')` }}
-    >
+    <div className="h-screen bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url('${'/images/gradient.png'}')` }}>
       <div className="w-screen bg-white pt-2 pb-2">
         <div className="justify-center text-5xl font-cursive flex">
           Boba Tracker
@@ -47,7 +44,7 @@ const LogIn = () => {
           <div className="text-base font-cursive text-center">purchases</div>
         </div>
         <form
-          className=" bg-white shadow-md p-12 mx-8 mt-6 rounded-lg"
+          className="bg-white shadow-md border border-black-400 p-12 mx-8 mt-6 rounded-lg"
           onSubmit={loginHandler}
         >
           <fieldset>
@@ -71,7 +68,8 @@ const LogIn = () => {
                   name="email"
                   type="text"
                   required
-                  className="border-gray-400 w-full text-black border-2 rounded-lg text-sm mb-4 py-2 px-3"
+                  className="shadow appearance-none outline-none border-2 border-gray-400 rounded w-full py-2 px-3 mb-3
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
               </div>
@@ -90,7 +88,8 @@ const LogIn = () => {
                   name="password"
                   type="password"
                   required
-                  className="border-gray-400 w-full text-black border-2 rounded-lg text-sm mb-4 py-2 px-3"
+                  className="shadow appearance-none outline-none border-2 border-gray-400 rounded w-full py-2 px-3 mb-2
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
               </div>

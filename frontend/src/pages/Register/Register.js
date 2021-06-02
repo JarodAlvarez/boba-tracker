@@ -45,10 +45,7 @@ const Register = () => {
   }
 
   return (
-    <div
-      className="min-h-screen bg-no-repeat bg-cover bg-center"
-      style={{ backgroundImage: `url('${'/images/gradient.png'}')` }}
-    >
+    <div className="min-h-screen bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url('${'/images/gradient.png'}')` }}>
       <div className="w-screen bg-white pt-2 pb-2">
         <div className="justify-center text-5xl font-cursive flex">
           Boba Tracker
@@ -91,7 +88,8 @@ const Register = () => {
                   name="name"
                   type="text"
                   required
-                  className="border-gray-400 w-full text-black border-2 rounded-lg text-sm mb-2 py-2 px-3"
+                  className="shadow appearance-none outline-none border-2 border-gray-400 rounded w-full py-2 px-3 mb-2
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
               </div>
@@ -106,7 +104,8 @@ const Register = () => {
                   name="email"
                   type="text"
                   required
-                  className="border-gray-400 w-full text-black border-2 rounded-lg text-sm mb-2 py-2 px-3"
+                  className="shadow appearance-none outline-none border-2 border-gray-400 rounded w-full py-2 px-3 mb-2
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
               </div>
@@ -125,26 +124,28 @@ const Register = () => {
                   name="password"
                   type="password"
                   required
-                  className="border-gray-400 w-full text-black border-2 rounded-lg text-sm mb-2 py-2 px-3"
+                  className="shadow appearance-none outline-none border-2 border-gray-400 rounded w-full py-2 px-3 mb-2
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
               </div>
             </div>
-            <div className="items-baseline justify-between w-full">
+            <div className="items-baseline justify-between mb-2 w-full">
               <label
-                className="text-black text-lg"
+                className="text-black text-lg mb-2"
                 name="confirmation"
                 htmlFor="confirmation"
               >
                 Confirm Password
               </label>
-              <div className="mb-2 w-full mt-2">
+              <div className="mb-4 w-full mt-2">
                 <input
                   id="confirmation"
                   name="confirmation"
                   type="password"
                   required
-                  className="border-gray-400 w-full text-black border-2 rounded-lg text-sm mb-4 py-2 px-3"
+                  className="shadow appearance-none outline-none border-2 border-gray-400 rounded w-full py-2 px-3 mb-2
+                  bg-white text-gray-900 leading-tight focus:shadow-outline"
                   onChange={onChangeHandler}
                 />
               </div>
