@@ -167,7 +167,7 @@ const Edit_History = (props) => {
                 name="date"
                 type="text"
                 pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}$"
-                className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
+                className={`border-gray-500 w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
                 id="date"
                 required
                 placeholder="mm-dd-yyyy"
@@ -185,7 +185,7 @@ const Edit_History = (props) => {
               <input
                 name="drink"
                 type="text"
-                className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
+                className={`border-gray-500 w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
                 id="drink"
                 required
                 placeholder="Drink name"
@@ -203,7 +203,7 @@ const Edit_History = (props) => {
                 step="0.01"
                 required
                 placeholder="Drink price"
-                className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
+                className={`border-gray-500 w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
                 id="price"
                 defaultValue={price}
                 onChange={onChangeHandler}
@@ -221,7 +221,7 @@ const Edit_History = (props) => {
                 max="1"
                 required
                 placeholder="Value of 0, 0.25, 0.50, 0.75, or 1"
-                className={`w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
+                className={`border-gray-500 w-full p-2 text-black border-2 rounded-lg text-sm mb-4`}
                 id="sweetness"
                 defaultValue={sweetness}
                 onChange={onChangeHandler}
